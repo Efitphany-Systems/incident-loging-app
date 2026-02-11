@@ -1,7 +1,7 @@
 const page = () => {
   return (
     <div className="h-dvh flex justify-center items-center uppercase">
-      Incident List
+      Assigned Zones
     </div>
   );
 };

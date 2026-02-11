@@ -1,5 +1,9 @@
 const page = () => {
-  return <div>Incident Page</div>;
+  return (
+    <div className="h-dvh flex justify-center items-center uppercase">
+      NEW INCIDENT
+    </div>
+  );
 };
 
 export default page;
