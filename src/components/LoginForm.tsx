@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
+import { Loader } from "lucide-react";
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ export default function LoginForm() {
     try {
       console.log("Login attempt:", { email, password });
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     } catch (err) {
       setError("Invalid email or password");
     } finally {
@@ -103,7 +103,7 @@ export default function LoginForm() {
               disabled={isLoading}
               className="w-full"
             >
-              {isLoading ? "Signing in..." : "SIGN IN"}
+              {isLoading ? <Loader className="animate-spin" /> : "SIGN IN"}
             </Button>
           </form>
         </div>
