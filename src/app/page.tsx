@@ -15,11 +15,9 @@ export default function IncidentsPage() {
 
           {menuItems.map((item) => (
             <Link key={item.id} href={item.href}>
-              <Card className="border-0 p-6 cursor-pointer transition-colors w-full bg-secondary hover:bg-brand active:bg-brand">
+              <Card className="border-0 p-6 cursor-pointer transition-colors w-full bg-secondary hover:bg-brand active:bg-brand hover:text-brand-foreground active:text-brand-foreground">
                 <div className="text-center">
-                  <p className="sm font-semibold hover:text-brand-foreground! active:text-brand-foreground!">
-                    {item.title}
-                  </p>
+                  <p className="sm font-semibold">{item.title}</p>
                 </div>
               </Card>
             </Link>
