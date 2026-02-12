@@ -7,7 +7,7 @@ export default function IncidentsPage() {
     <div className="min-h-dvh flex justify-center bg-background text-foreground py-2">
       <div className="max-w-125 w-full">
         <div className="flex flex-col gap-3 px-3 ">
-          <div className="text-center mb-2">
+          <div className="text-center my-3">
             <h1 className="text-4xl font-bold tracking-tight text-balance">
               INCIDENTS
             </h1>
@@ -15,9 +15,11 @@ export default function IncidentsPage() {
 
           {menuItems.map((item) => (
             <Link key={item.id} href={item.href}>
-              <Card className="border-0 p-6 cursor-pointer transition-colors w-full bg-secondary hover:bg-primary hover:text-primary-foreground">
+              <Card className="border-0 p-6 cursor-pointer transition-colors w-full bg-secondary hover:bg-brand active:bg-brand">
                 <div className="text-center">
-                  <p className="sm font-semibold">{item.title}</p>
+                  <p className="sm font-semibold hover:text-brand-foreground! active:text-brand-foreground!">
+                    {item.title}
+                  </p>
                 </div>
               </Card>
             </Link>
