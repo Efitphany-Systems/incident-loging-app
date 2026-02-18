@@ -26,11 +26,6 @@ export const menuItems: MenuItem[] = [
     title: "ADD NEW STAFF",
     href: "/add-staff",
   },
-  {
-    id: "login",
-    title: "LOGIN",
-    href: "/login",
-  },
 ];
 
 export const eventInfo = {

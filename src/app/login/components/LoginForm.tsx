@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader } from "lucide-react";
+import { login } from "@/app/login/login";
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,10 +19,13 @@ export default function LoginForm() {
 
     try {
       console.log("Login attempt:", { email, password });
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      window.location.href = "/";
-    } catch (err) {
-      setError("Invalid email or password");
+      const data = await login(email, password);
+
+      console.log(data);
+
+      // window.location.href = "/";
+    } catch (err: unknown) {
+      setError(err.message ?? "");
     } finally {
       setIsLoading(false);
     }
