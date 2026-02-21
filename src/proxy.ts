@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { createAPIClient } from "./lib/supabase/server-client";
 import { authRoutes, publicRoutes } from "./constants/middleware";
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (
@@ -24,9 +24,7 @@ export async function middleware(req: NextRequest) {
   const hasClaims = !!claims;
 
   const isAuthPage = authRoutes.some((p) => pathname.startsWith(p));
-  const isPublicPage = publicRoutes.some(
-    (p) => pathname === p || pathname.startsWith(p + "/"),
-  );
+  const isPublicPage = publicRoutes.some((p) => pathname === p || pathname.startsWith(p + "/"));
   const isPrivatePage = !isAuthPage && !isPublicPage;
 
   if (!hasClaims && isPrivatePage) {
