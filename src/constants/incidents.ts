@@ -11,6 +11,7 @@ export const shows = [
 export const witnessTypes = ["employee", "non employee"];
 
 export const IncidentReportHeaders = {
+  NewIncidentReport: "New Incident Report",
   MandatoryInformation: "Mandatory Information",
   show: "Show/Event",
   wearsGlasses: "Do you wear GLASSES or LENSES?",

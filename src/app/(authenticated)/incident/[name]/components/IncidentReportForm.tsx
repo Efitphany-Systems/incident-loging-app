@@ -11,9 +11,10 @@ import MandatoryInformation from "./BasicInformation";
 import { IncidentFormData } from "@/types/incident";
 import { Ambulance, Loader, Scale } from "lucide-react";
 
-export default function IncidentReportForm() {
+export default function IncidentReportForm({ type }: { type: string }) {
   // Move this state hasndling to redux in future
   const [formData, setFormData] = useState<IncidentFormData>({
+    type: type,
     show: "",
     wearsGlasses: "yes",
     inUse: "yes",
@@ -106,7 +107,7 @@ export default function IncidentReportForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
-      {/* {JSON.stringify(formData)} */}
+      {JSON.stringify(formData)}
 
       <div className="flex w-full flex-col items-stretch gap-4 md:flex-row">
         <div className="w-full md:flex-1">
