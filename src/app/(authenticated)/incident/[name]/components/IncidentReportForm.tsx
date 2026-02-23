@@ -11,10 +11,10 @@ import MandatoryInformation from "./BasicInformation";
 import { IncidentFormData } from "@/types/incident";
 import { Ambulance, Loader, Scale } from "lucide-react";
 
-export default function IncidentReportForm({ type }: { type: string }) {
+export default function IncidentReportForm({ category }: { category: string }) {
   // Move this state hasndling to redux in future
   const [formData, setFormData] = useState<IncidentFormData>({
-    type: type,
+    category: category,
     show: "",
     wearsGlasses: "yes",
     inUse: "yes",

@@ -1,5 +1,5 @@
 export interface IncidentFormData {
-  type?: string;
+  category?: string;
   show: string;
   wearsGlasses: string;
   inUse: string;
