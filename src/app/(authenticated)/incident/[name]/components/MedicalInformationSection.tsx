@@ -1,10 +1,11 @@
 "use client";
 
-import { RadioField } from "@/components/RadioOption";
+import { RadioOption } from "@/components/form/RadioOption";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { YesNoOptions } from "@/constants/app";
 import { IncidentReportHeaders } from "@/constants/incidents";
 import { MedicalInformationProps } from "@/types/incident";
 
@@ -14,14 +15,11 @@ export default function MedicalInformationSection({ data, onChange }: MedicalInf
       <div className="text-center text-xl font-bold">{IncidentReportHeaders.MedicalInformation}</div>
 
       <div>
-        <RadioField
+        <RadioOption
           name="visibleInjuries"
           value={data.visibleInjuries}
           onChange={(v) => onChange("visibleInjuries", v)}
-          options={[
-            { label: "Yes", value: "yes" },
-            { label: "No", value: "no" },
-          ]}
+          options={YesNoOptions}
         />
       </div>
 

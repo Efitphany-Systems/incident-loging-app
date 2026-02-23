@@ -45,3 +45,8 @@ export const eventInfo = {
   artist: "Tyler Williams",
   time: "8:45 PM",
 };
+
+export const YesNoOptions = [
+  { label: "Yes", value: "yes" },
+  { label: "No", value: "no" },
+];

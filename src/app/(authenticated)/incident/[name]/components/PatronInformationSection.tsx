@@ -4,9 +4,9 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { IncidentReportHeaders } from "@/constants/incidents";
-import { FormSectionProps } from "@/types/incident";
+import { PatronInformationSectionProps } from "@/types/incident";
 
-export default function PatronInformationSection({ formData, onChange }: FormSectionProps) {
+export default function PatronInformationSection({ data, onChange }: PatronInformationSectionProps) {
   return (
     <Card className="bg-card text-card-foreground space-y-1 p-4">
       <div className="text-center text-xl font-bold">{IncidentReportHeaders.PatronInformation}</div>
@@ -14,7 +14,7 @@ export default function PatronInformationSection({ formData, onChange }: FormSec
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.patronName}</Label>
         <Input
           type="text"
-          value={formData.patronName}
+          value={data.patronName}
           onChange={(e) => onChange("patronName", e.target.value)}
           placeholder="Enter full name"
         />
@@ -24,7 +24,7 @@ export default function PatronInformationSection({ formData, onChange }: FormSec
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.patronPhone}</Label>
         <Input
           type="tel"
-          value={formData.patronPhone}
+          value={data.patronPhone}
           onChange={(e) => onChange("patronPhone", e.target.value)}
           placeholder="Enter phone number"
         />
@@ -34,7 +34,7 @@ export default function PatronInformationSection({ formData, onChange }: FormSec
         <Label className="mb-1 text-sm font-bold">{IncidentReportHeaders.patronEmail}</Label>
         <Input
           type="email"
-          value={formData.patronEmail}
+          value={data.patronEmail}
           onChange={(e) => onChange("patronEmail", e.target.value)}
           placeholder="Enter email"
         />
@@ -44,7 +44,7 @@ export default function PatronInformationSection({ formData, onChange }: FormSec
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.patronContactTime}</Label>
         <Input
           type="text"
-          value={formData.patronContactTime}
+          value={data.patronContactTime}
           onChange={(e) => onChange("patronContactTime", e.target.value)}
           placeholder="E.g., Evenings after 5pm"
         />
@@ -54,7 +54,7 @@ export default function PatronInformationSection({ formData, onChange }: FormSec
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.patronAddress}</Label>
         <Input
           type="text"
-          value={formData.patronAddress}
+          value={data.patronAddress}
           onChange={(e) => onChange("patronAddress", e.target.value)}
           placeholder="Enter street address"
         />
@@ -64,7 +64,7 @@ export default function PatronInformationSection({ formData, onChange }: FormSec
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.patronCityState}</Label>
         <Input
           type="text"
-          value={formData.patronCityState}
+          value={data.patronCityState}
           onChange={(e) => onChange("patronCityState", e.target.value)}
           placeholder="Enter city, state, and zip"
         />

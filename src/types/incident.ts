@@ -54,8 +54,13 @@ export interface IncidentFormData {
 }
 
 export interface EventAndFillerInformationProps {
-  formData: EventAndFillerInformation;
+  data: EventAndFillerInformation;
   onChange: (field: keyof EventAndFillerInformation, value: any) => void;
+}
+
+export interface PatronInformationSectionProps {
+  data: PatronInformation;
+  onChange: (field: keyof PatronInformation, value: any) => void;
 }
 
 export interface MedicalInformationProps {
@@ -70,7 +75,7 @@ export interface LawEnforcementProps {
 
 /************************************ NEED TO REVIEW AND UPDATE ***********************************************************/
 
-export interface Witness {
+interface Witness {
   id: string;
   name: string;
   phone: string;
@@ -79,7 +84,7 @@ export interface Witness {
   employmentType: string;
 }
 
-export interface WitnessSectionProps {
+interface WitnessSectionProps {
   witnesses: Witness[];
   onAddWitness: () => void;
   onRemoveWitness: (id: string) => void;

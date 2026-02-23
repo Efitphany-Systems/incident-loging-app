@@ -1,5 +1,5 @@
-import { Label } from "./ui/label";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { Label } from "../ui/label";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 type RadioOption<T extends string = string> = {
   label: string;
@@ -14,7 +14,7 @@ interface RadioFieldProps<T extends string = string> {
   className?: string;
 }
 
-export function RadioField<T extends string = string>({
+export function RadioOption<T extends string = string>({
   value,
   onChange,
   name,

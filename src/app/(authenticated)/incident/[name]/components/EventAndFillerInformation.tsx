@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { IncidentReportHeaders, shows } from "@/constants/incidents";
 import { EventAndFillerInformationProps } from "@/types/incident";
 
-export default function EventAndFillerInformation({ formData, onChange }: EventAndFillerInformationProps) {
+export default function EventAndFillerInformation({ data, onChange }: EventAndFillerInformationProps) {
   return (
     <Card className="bg-card text-card-foreground h-full space-y-1 p-4">
       <div className="text-center text-xl font-bold">{IncidentReportHeaders.EventAndFillerInformation}</div>
@@ -15,7 +15,7 @@ export default function EventAndFillerInformation({ formData, onChange }: EventA
       <div>
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.show}</Label>
 
-        <Select value={formData.show} onValueChange={(value) => onChange("show", value)}>
+        <Select value={data.show} onValueChange={(value) => onChange("show", value)}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a show" />
           </SelectTrigger>
@@ -34,11 +34,7 @@ export default function EventAndFillerInformation({ formData, onChange }: EventA
 
       <div>
         <Label className="mb-1 text-sm font-bold">{IncidentReportHeaders.wearsGlasses}</Label>
-        <RadioGroup
-          value={formData.wearsGlasses}
-          onValueChange={(v) => onChange("wearsGlasses", v)}
-          className="flex gap-6"
-        >
+        <RadioGroup value={data.wearsGlasses} onValueChange={(v) => onChange("wearsGlasses", v)} className="flex gap-6">
           <div className="flex items-center gap-2">
             <RadioGroupItem value="yes" id="wearsGlasses-yes" />
             <Label htmlFor="wearsGlasses-yes">Yes</Label>
@@ -53,7 +49,7 @@ export default function EventAndFillerInformation({ formData, onChange }: EventA
 
       <div>
         <Label className="mb-1 text-sm font-bold">{IncidentReportHeaders.inUse}</Label>
-        <RadioGroup value={formData.inUse} onValueChange={(v) => onChange("inUse", v)} className="flex gap-6">
+        <RadioGroup value={data.inUse} onValueChange={(v) => onChange("inUse", v)} className="flex gap-6">
           <div className="flex items-center gap-2">
             <RadioGroupItem value="yes" id="inUse-yes" />
             <Label htmlFor="inUse-yes">Yes</Label>

@@ -32,12 +32,12 @@ export default function IncidentReportForm({ category }: { category: string }) {
       <div className="flex w-full flex-col items-stretch gap-4 md:flex-row">
         <div className="w-full md:flex-1">
           <EventAndFillerInformation
-            formData={formData.eventAndFillerInformation}
+            data={formData.eventAndFillerInformation}
             onChange={updateSection("eventAndFillerInformation")}
           />
         </div>
         <div className="w-full md:flex-1">
-          <PatronInformationSection formData={formData} onChange={updateSection("patronInformation")} />
+          <PatronInformationSection data={formData.patronInformation} onChange={updateSection("patronInformation")} />
         </div>
       </div>
 
