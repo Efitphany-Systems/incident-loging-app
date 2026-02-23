@@ -12,7 +12,7 @@ export const witnessTypes = ["employee", "non employee"];
 
 export const IncidentReportHeaders = {
   NewIncidentReport: "New Incident Report",
-  MandatoryInformation: "Mandatory Information",
+  EventAndFillerInformation: "Event & Person Filling out Form Information",
   show: "Show/Event",
   wearsGlasses: "Do you wear GLASSES or LENSES?",
   inUse: "Were they in use?",

@@ -8,7 +8,7 @@ const IncidentPageHeader = ({ name }: { name: string }) => {
   return (
     <div className="mb-4 flex items-center justify-start">
       <ChevronLeft
-        className="h-10 w-10"
+        className="h-10 w-10 cursor-pointer"
         onClick={() => {
           router.push("/incident");
         }}

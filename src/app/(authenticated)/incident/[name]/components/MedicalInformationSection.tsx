@@ -1,5 +1,6 @@
 "use client";
 
+import { RadioField } from "@/components/RadioOption";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,49 +8,21 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { IncidentReportHeaders } from "@/constants/incidents";
 import { MedicalInformationProps } from "@/types/incident";
 
-export default function MedicalInformationSection({
-  data = {
-    visibleInjuries: "yes",
-    visibleInjuriesExplain: "",
-    medicalAttention: "yes",
-    offeredMedical: "yes",
-    accepted: "accepted",
-    ambulanceRequested: "yes",
-    ambulanceCompany: "",
-    ambulanceEMT: "",
-    didPatientLeaveAmbulance: "yes",
-    whereTheyGo: "",
-  },
-  onChange,
-}: MedicalInformationProps) {
-  const handleChange = (field: string, value: string) => {
-    onChange({
-      ...data,
-      [field]: value,
-    });
-  };
-
+export default function MedicalInformationSection({ data, onChange }: MedicalInformationProps) {
   return (
     <Card className="bg-card text-card-foreground space-y-1 p-4">
       <div className="text-center text-xl font-bold">{IncidentReportHeaders.MedicalInformation}</div>
 
       <div>
-        <Label className="mb-1 text-sm font-bold">{IncidentReportHeaders.VisibleInjuries}</Label>
-        <RadioGroup
-          value={data.visibleInjuries || ""}
-          onValueChange={(v) => handleChange("visibleInjuries", v)}
-          className="flex gap-6"
-        >
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="yes" id="visibleInjuries-yes" />
-            <Label htmlFor="visibleInjuries-yes">Yes</Label>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="no" id="visibleInjuries-no" />
-            <Label htmlFor="visibleInjuries-no">No</Label>
-          </div>
-        </RadioGroup>
+        <RadioField
+          name="visibleInjuries"
+          value={data.visibleInjuries}
+          onChange={(v) => onChange("visibleInjuries", v)}
+          options={[
+            { label: "Yes", value: "yes" },
+            { label: "No", value: "no" },
+          ]}
+        />
       </div>
 
       <div>
@@ -57,7 +30,7 @@ export default function MedicalInformationSection({
         <Input
           type="text"
           value={data.visibleInjuriesExplain || ""}
-          onChange={(e) => handleChange("visibleInjuriesExplain", e.target.value)}
+          onChange={(e) => onChange("visibleInjuriesExplain", e.target.value)}
           placeholder="Describe injuries if any"
         />
       </div>
@@ -66,7 +39,7 @@ export default function MedicalInformationSection({
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.MedicalAttention}</Label>
         <RadioGroup
           value={data.medicalAttention || ""}
-          onValueChange={(e) => handleChange("medicalAttention", e)}
+          onValueChange={(e) => onChange("medicalAttention", e)}
           className="flex gap-6"
         >
           <div className="flex items-center gap-2">
@@ -85,7 +58,7 @@ export default function MedicalInformationSection({
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.medicalServiceOffered}</Label>
         <RadioGroup
           value={data.offeredMedical || ""}
-          onValueChange={(e) => handleChange("offeredMedical", e)}
+          onValueChange={(e) => onChange("offeredMedical", e)}
           className="flex gap-6"
         >
           <div className="flex items-center gap-2">
@@ -102,11 +75,7 @@ export default function MedicalInformationSection({
 
       <div>
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.medicalAccepted}</Label>
-        <RadioGroup
-          value={data.accepted || ""}
-          onValueChange={(e) => handleChange("accepted", e)}
-          className="flex gap-6"
-        >
+        <RadioGroup value={data.accepted || ""} onValueChange={(e) => onChange("accepted", e)} className="flex gap-6">
           <div className="flex items-center gap-2">
             <RadioGroupItem value="yes" id="accepted-yes" />
             <Label htmlFor="accepted-yes">ACCEPTED</Label>
@@ -123,7 +92,7 @@ export default function MedicalInformationSection({
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.ambulanceRequested}</Label>
         <RadioGroup
           value={data.ambulanceRequested || ""}
-          onValueChange={(e) => handleChange("ambulanceRequested", e)}
+          onValueChange={(e) => onChange("ambulanceRequested", e)}
           className="flex gap-6"
         >
           <div className="flex items-center gap-2">
@@ -143,7 +112,7 @@ export default function MedicalInformationSection({
         <Input
           type="text"
           value={data.ambulanceCompany || ""}
-          onChange={(e) => handleChange("ambulanceCompany", e.target.value)}
+          onChange={(e) => onChange("ambulanceCompany", e.target.value)}
           placeholder="Ambulance company name"
         />
       </div>
@@ -153,7 +122,7 @@ export default function MedicalInformationSection({
         <Input
           type="text"
           value={data.ambulanceEMT || ""}
-          onChange={(e) => handleChange("ambulanceEMT", e.target.value)}
+          onChange={(e) => onChange("ambulanceEMT", e.target.value)}
           placeholder="EMT info"
         />
       </div>
@@ -163,7 +132,7 @@ export default function MedicalInformationSection({
 
         <RadioGroup
           value={data.didPatientLeaveAmbulance || ""}
-          onValueChange={(e) => handleChange("didPatientLeaveAmbulance", e)}
+          onValueChange={(e) => onChange("didPatientLeaveAmbulance", e)}
           className="flex gap-6"
         >
           <div className="flex items-center gap-2">
@@ -183,7 +152,7 @@ export default function MedicalInformationSection({
         <Input
           type="text"
           value={data.whereTheyGo || ""}
-          onChange={(e) => handleChange("whereTheyGo", e.target.value)}
+          onChange={(e) => onChange("whereTheyGo", e.target.value)}
           placeholder="Where did they go?"
         />
       </div>

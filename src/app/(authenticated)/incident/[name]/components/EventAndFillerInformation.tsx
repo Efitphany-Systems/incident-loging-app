@@ -5,12 +5,12 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { IncidentReportHeaders, shows } from "@/constants/incidents";
-import { FormSectionProps } from "@/types/incident";
+import { EventAndFillerInformationProps } from "@/types/incident";
 
-export default function MandatoryInformation({ formData, onChange }: FormSectionProps) {
+export default function EventAndFillerInformation({ formData, onChange }: EventAndFillerInformationProps) {
   return (
     <Card className="bg-card text-card-foreground h-full space-y-1 p-4">
-      <div className="text-center text-xl font-bold">{IncidentReportHeaders.MandatoryInformation}</div>
+      <div className="text-center text-xl font-bold">{IncidentReportHeaders.EventAndFillerInformation}</div>
 
       <div>
         <Label className="mb-1 block text-sm font-bold">{IncidentReportHeaders.show}</Label>
