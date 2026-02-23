@@ -1,6 +1,18 @@
 import { MenuItem } from "@/types/home";
 
+export const APP_NAME = "Efitphany Systems";
+export const APP_DESCRIPTION = "Efitphany Systems incident logging app";
 export const menuItems: MenuItem[] = [
+  {
+    id: "dashboard",
+    title: "DASHBOARD",
+    href: "/",
+  },
+  {
+    id: "events",
+    title: "EVENTS",
+    href: "/events",
+  },
   {
     id: "new-incident",
     title: "NEW INCIDENT",

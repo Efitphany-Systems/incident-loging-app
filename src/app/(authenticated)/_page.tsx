@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
-import { eventInfo, menuItems } from "@/constants/home";
+import { eventInfo, menuItems } from "@/constants/app";
 
 export default function IncidentsPage() {
   return (
