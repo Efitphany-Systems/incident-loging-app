@@ -1,5 +1,5 @@
 import { LawEnforcement, Medical } from "@/lib/schema/incident";
-
+import { Users, Sword, Wine, Cross, Megaphone, DoorOpen } from "lucide-react";
 export const shows = [
   "Main Stage",
   "Side Stage",
@@ -8,6 +8,15 @@ export const shows = [
   "VIP Area",
   "General Admission",
   "Outdoor Area",
+];
+
+export const IncidentCategories = [
+  { label: "FIGHT", icon: Users },
+  { label: "WEAPON", icon: Sword },
+  { label: "INTOXICATION", icon: Wine },
+  { label: "MEDICAL ISSUE", icon: Cross },
+  { label: "STAFF CALL FOR BACKUP", icon: Megaphone },
+  { label: "EJECTION", icon: DoorOpen },
 ];
 
 export const witnessTypes = ["employee", "non employee"];

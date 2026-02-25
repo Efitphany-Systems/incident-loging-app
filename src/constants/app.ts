@@ -14,29 +14,29 @@ export const menuItems: MenuItem[] = [
     href: "/events",
   },
   {
-    id: "new-incident",
-    title: "NEW INCIDENT",
-    href: "/incident",
+    id: "incidents",
+    title: "INCIDENTS",
+    href: "/incidents",
+  },
+  // {
+  //   id: "assigned-zones",
+  //   title: "MY ASSIGNED ZONES",
+  //   href: "/assigned-zones",
+  // },
+  // {
+  //   id: "radio-alerts",
+  //   title: "RADIO ALERTS",
+  //   href: "/alerts",
+  // },
+  {
+    id: "staff-management",
+    title: "STAFF MANAGEMENT",
+    href: "/staff",
   },
   {
-    id: "todays-incidents",
-    title: "VIEW TODAY'S INCIDENTS",
-    href: "/incident-list",
-  },
-  {
-    id: "assigned-zones",
-    title: "MY ASSIGNED ZONES",
-    href: "/assigned-zones",
-  },
-  {
-    id: "radio-alerts",
-    title: "RADIO ALERTS",
-    href: "/alerts",
-  },
-  {
-    id: "add-security-staff",
-    title: "ADD NEW STAFF",
-    href: "/add-staff",
+    id: "venues",
+    title: "ALL VENUES",
+    href: "/venues",
   },
 ];
 
