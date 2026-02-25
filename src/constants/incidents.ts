@@ -1,3 +1,5 @@
+import { LawEnforcement, Medical } from "@/lib/schema/incident";
+
 export const shows = [
   "Main Stage",
   "Side Stage",
@@ -49,4 +51,26 @@ export const IncidentReportHeaders = {
   reportNumber: "Report Number",
   citation: "CITATION # or CHARGE/ARREST:",
   officerName: "Officer Name & Badge #:",
+};
+
+export const defaultMedical: Medical = {
+  visibleInjuries: "yes",
+  visibleInjuriesExplain: "",
+  medicalAttention: "yes",
+  offeredMedical: "yes",
+  accepted: "accepted",
+  ambulanceRequested: "no",
+  ambulanceCompany: "",
+  ambulanceEMT: "",
+  didPatientLeaveAmbulance: "yes",
+  whereTheyGo: "",
+};
+
+export const defaultLaw: LawEnforcement = {
+  contacted: "yes",
+  explanation: "",
+  reportWritten: "no",
+  reportNumber: "",
+  citation: "",
+  officerName: "",
 };

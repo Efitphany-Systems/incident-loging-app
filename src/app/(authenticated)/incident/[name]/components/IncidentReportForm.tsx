@@ -7,96 +7,81 @@ import MedicalInformationSection from "./MedicalInformationSection";
 import LawEnforcementSection from "./LawEnforcementSection";
 import { Ambulance, Loader, Scale } from "lucide-react";
 import EventAndFillerInformation from "./EventAndFillerInformation";
-import { useIncidentForm } from "@/hooks/useIncidentForm";
+import { useIncidentForm } from "@/hooks/use-incident-form";
+import { FormProvider } from "react-hook-form";
+import { defaultLaw, defaultMedical } from "@/constants/incidents";
 
 export default function IncidentReportForm({ category }: { category: string }) {
-  const {
-    formData,
-    updateSection,
-    addWitness,
-    removeWitness,
-    updateWitness,
-    showMedical,
-    enableMedical,
-    disableMedical,
-    enableLawEnforcement,
-    disableLawEnforcement,
-    showLawEnforcement,
-    isSubmitting,
-    handleSubmit,
-  } = useIncidentForm(category);
+  const form = useIncidentForm(category);
+  const medicalSection = form.watch("medical");
+  const lawSection = form.watch("lawEnforcement");
+  const enableMedical = () => form.setValue("medical", defaultMedical);
+  const disableMedical = () => form.setValue("medical", undefined);
+  const enableLaw = () => form.setValue("lawEnforcement", defaultLaw);
+  const disableLaw = () => form.setValue("lawEnforcement", undefined);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
-      {/* EventAndFillerInformation */}
-      <div className="flex w-full flex-col items-stretch gap-4 md:flex-row">
-        <div className="w-full md:flex-1">
-          <EventAndFillerInformation
-            data={formData.eventAndFillerInformation}
-            onChange={updateSection("eventAndFillerInformation")}
-          />
+    <FormProvider {...form}>
+      <form onSubmit={form.reportIncident} className="space-y-4">
+        <div className="flex w-full flex-col items-stretch gap-4 lg:flex-row">
+          <div className="w-full lg:flex-1">
+            <EventAndFillerInformation />
+          </div>
+          <div className="w-full lg:flex-1">
+            <PatronInformationSection />
+          </div>
         </div>
-        <div className="w-full md:flex-1">
-          <PatronInformationSection data={formData.patronInformation} onChange={updateSection("patronInformation")} />
-        </div>
-      </div>
 
-      {/* WitnessSection */}
-      <div>
-        <WitnessSection
-          witnesses={formData.witnesses}
-          onAddWitness={addWitness}
-          onRemoveWitness={removeWitness}
-          onUpdateWitness={updateWitness}
-        />
-      </div>
+        <WitnessSection />
 
-      {/* Medical and Law information */}
-      <div className="flex w-full flex-col items-stretch gap-4 md:flex-row">
-        {showMedical && formData.medical && (
-          <div className="w-full md:flex-1">
-            <div className="space-y-4">
-              <>
-                <MedicalInformationSection data={formData.medical} onChange={updateSection("medical")} />
+        <div className="flex w-full flex-col items-stretch gap-4 lg:flex-row">
+          {!!medicalSection && (
+            <div className="w-full lg:flex-1">
+              <div className="space-y-4">
+                <MedicalInformationSection />
                 <Button type="button" onClick={disableMedical} variant="link" className="w-full">
                   Remove Medical Information
                 </Button>
-              </>
+              </div>
             </div>
-          </div>
-        )}
-        {showLawEnforcement && formData.lawEnforcement && (
-          <div className="w-full md:flex-1">
-            <div className="space-y-4">
-              <>
-                <LawEnforcementSection data={formData.lawEnforcement} onChange={updateSection("lawEnforcement")} />
-                <Button type="button" onClick={disableLawEnforcement} variant="link" className="w-full">
+          )}
+
+          {!!lawSection && (
+            <div className="w-full lg:flex-1">
+              <div className="space-y-4">
+                <LawEnforcementSection />
+                <Button type="button" onClick={disableLaw} variant="link" className="w-full">
                   Remove Law Enforcement Information
                 </Button>
-              </>
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
 
-      {/* Control and submit  */}
-      <div className="flex w-full flex-col items-center justify-end gap-4 px-4 md:flex-row">
-        {!showMedical && (
-          <Button type="button" size="xl" className="w-full md:w-70" onClick={enableMedical} variant="default">
-            <Ambulance />
-            Add Medical Information
+        <div className="flex w-full flex-col items-center justify-end gap-4 px-4 lg:flex-row">
+          {!medicalSection && (
+            <Button type="button" size="xl" className="w-full lg:w-72" onClick={enableMedical} variant="default">
+              <Ambulance />
+              Add Medical Information
+            </Button>
+          )}
+          {!lawSection && (
+            <Button type="button" size="xl" className="w-full lg:w-72" onClick={enableLaw} variant="default">
+              <Scale />
+              Add Law Enforcement Information
+            </Button>
+          )}
+          <Button
+            size="xl"
+            type="submit"
+            variant="primary"
+            disabled={form.formState.isSubmitting}
+            className="w-full lg:w-64"
+          >
+            {form.formState.isSubmitting ? <Loader className="animate-spin" /> : "SUBMIT INCIDENT REPORT"}
           </Button>
-        )}
-        {!showLawEnforcement && (
-          <Button type="button" size="xl" className="w-full md:w-70" onClick={enableLawEnforcement} variant="default">
-            <Scale />
-            Add Law Enforcement Information
-          </Button>
-        )}
-        <Button size="xl" type="submit" disabled={isSubmitting} variant="primary" className="w-full md:w-60">
-          {isSubmitting ? <Loader className="animate-spin" /> : "SUBMIT INCIDENT REPORT"}
-        </Button>
-      </div>
-    </form>
+        </div>
+      </form>
+    </FormProvider>
   );
 }

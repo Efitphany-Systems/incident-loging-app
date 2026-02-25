@@ -2,12 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
-import { FormField } from "@/components/form/FormField";
 import { useAuth } from "@/hooks/use-auth";
+import { RHFInput } from "@/components/form/RHFInput";
 
 export default function LoginForm() {
   const {
-    register,
+    control,
     signIn,
     formState: { errors, isSubmitting },
   } = useAuth();
@@ -22,23 +22,8 @@ export default function LoginForm() {
           </div>
 
           <form onSubmit={signIn} className="space-y-5">
-            <FormField
-              id="email"
-              label="Email"
-              type="email"
-              placeholder="you@example.com"
-              register={register("email")}
-              error={errors.email?.message}
-            />
-
-            <FormField
-              id="password"
-              label="Password"
-              type="password"
-              placeholder="••••••••"
-              register={register("password")}
-              error={errors.password?.message}
-            />
+            <RHFInput control={control} name="email" label="Email" placeholder="you@example.com" />
+            <RHFInput control={control} name="password" label="Password" placeholder="••••••••" type="password" />
 
             {errors.root && (
               <p role="alert" className="text-destructive text-center text-sm">

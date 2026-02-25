@@ -11,16 +11,16 @@ export function useAuth() {
   const router = useRouter();
   const [isSigningOut, setIsSigningOut] = useState(false);
 
-  const form = useForm<LoginFormValues>({
+  const signinForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
   });
 
-  const signIn = form.handleSubmit(async ({ email, password }) => {
+  const signIn = signinForm.handleSubmit(async ({ email, password }) => {
     try {
       await login(email, password);
       router.replace("/");
     } catch (e) {
-      form.setError("root", {
+      signinForm.setError("root", {
         type: "server",
         message: "Invalid email or password",
       });
@@ -38,7 +38,7 @@ export function useAuth() {
   };
 
   return {
-    ...form,
+    ...signinForm,
     signIn,
     signOut,
     isSigningOut,
