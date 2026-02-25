@@ -1,4 +1,4 @@
-import { Routes } from "@/types/middleware";
+import { Routes } from "@/types/proxy";
 
 export const authRoutes: Routes = ["/login", "/register", "/forget-password", "/update-password", "/test"];
 

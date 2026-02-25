@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createAPIClient } from "./lib/supabase/server-client";
-import { authRoutes, publicRoutes } from "./constants/middleware";
+import { authRoutes, publicRoutes } from "./constants/proxy";
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
