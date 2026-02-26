@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --write .",
-    "lint": "eslint"
+    "lint": "eslint",
+    "tsc": "npx tsc"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

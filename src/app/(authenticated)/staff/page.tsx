@@ -1,6 +1,6 @@
-import StaffTable from "./components/StaffTable";
-import StaffPageHeader from "./components/StaffPageHeader";
 import { getStaffAction } from "./action";
+import StaffPageHeader from "./StaffPageHeader";
+import StaffTable from "./StaffTable";
 
 export default async function StaffPage() {
   const staff = await getStaffAction();
