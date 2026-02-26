@@ -1,6 +1,6 @@
 import { Sidebar } from "@/components/ui/sidebar";
 import Content from "./Content";
-import Footer from "./Footer";
+import Footer from "../footer/Footer";
 import Header from "./Header";
 
 export function AppSidebar() {

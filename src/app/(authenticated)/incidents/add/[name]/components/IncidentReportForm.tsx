@@ -7,7 +7,7 @@ import MedicalInformationSection from "./MedicalInformationSection";
 import LawEnforcementSection from "./LawEnforcementSection";
 import { Ambulance, Loader, Scale } from "lucide-react";
 import EventAndFillerInformation from "./EventAndFillerInformation";
-import { useIncidentForm } from "@/hooks/use-incident-form";
+import { useIncidentForm } from "@/hooks/use-create-incident";
 import { FormProvider } from "react-hook-form";
 import { defaultLaw, defaultMedical } from "@/constants/incidents";
 

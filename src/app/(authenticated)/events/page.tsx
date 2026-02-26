@@ -1,5 +1,136 @@
+import EventsPageHeader from "./components/EventsPageHeader";
+import EventsTable, { EventDummy } from "./components/EventsTable";
+
+export const events: EventDummy[] = [
+  {
+    id: "e1",
+    venue_id: "v1",
+    name: "Security Briefing",
+    event_date: "2026-03-01",
+    start_time: "09:00",
+    end_time: "10:00",
+    created_by: "u1",
+    additional_information: "Monthly security staff briefing",
+    created_at: "2026-02-01T09:00:00Z",
+    updated_at: "2026-02-01T09:00:00Z",
+  },
+  {
+    id: "e2",
+    venue_id: "v1",
+    name: "Fire Drill",
+    event_date: "2026-03-03",
+    start_time: "11:00",
+    end_time: "12:00",
+    created_by: "u2",
+    additional_information: "Mandatory evacuation drill",
+    created_at: "2026-02-02T10:00:00Z",
+    updated_at: "2026-02-02T10:00:00Z",
+  },
+  {
+    id: "e3",
+    venue_id: "v2",
+    name: "Concert Setup",
+    event_date: "2026-03-05",
+    start_time: "08:00",
+    end_time: "14:00",
+    created_by: "u3",
+    additional_information: "Stage and sound preparation",
+    created_at: "2026-02-03T08:00:00Z",
+    updated_at: "2026-02-03T08:00:00Z",
+  },
+  {
+    id: "e4",
+    venue_id: "v2",
+    name: "Live Concert",
+    event_date: "2026-03-05",
+    start_time: "18:00",
+    end_time: "23:00",
+    created_by: "u3",
+    additional_information: "Main concert event",
+    created_at: "2026-02-03T18:00:00Z",
+    updated_at: "2026-02-03T18:00:00Z",
+  },
+  {
+    id: "e5",
+    venue_id: "v3",
+    name: "Staff Training",
+    event_date: "2026-03-07",
+    start_time: "10:00",
+    end_time: "13:00",
+    created_by: "u1",
+    additional_information: "New safety protocol training",
+    created_at: "2026-02-05T10:00:00Z",
+    updated_at: "2026-02-05T10:00:00Z",
+  },
+  {
+    id: "e6",
+    venue_id: "v3",
+    name: "Equipment Inspection",
+    event_date: "2026-03-09",
+    start_time: "09:30",
+    end_time: "11:30",
+    created_by: "u2",
+    additional_information: "Routine inspection of equipment",
+    created_at: "2026-02-06T09:30:00Z",
+    updated_at: "2026-02-06T09:30:00Z",
+  },
+  {
+    id: "e7",
+    venue_id: "v4",
+    name: "Community Meeting",
+    event_date: "2026-03-12",
+    start_time: "17:00",
+    end_time: "19:00",
+    created_by: "u3",
+    additional_information: "Local community discussion",
+    created_at: "2026-02-07T17:00:00Z",
+    updated_at: "2026-02-07T17:00:00Z",
+  },
+  {
+    id: "e8",
+    venue_id: "v4",
+    name: "Sports Event",
+    event_date: "2026-03-15",
+    start_time: "15:00",
+    end_time: "20:00",
+    created_by: "u2",
+    additional_information: "Regional sports competition",
+    created_at: "2026-02-08T15:00:00Z",
+    updated_at: "2026-02-08T15:00:00Z",
+  },
+  {
+    id: "e9",
+    venue_id: "v1",
+    name: "Emergency Response Drill",
+    event_date: "2026-03-18",
+    start_time: "10:00",
+    end_time: "12:00",
+    created_by: "u1",
+    additional_information: "Multi-agency emergency simulation",
+    created_at: "2026-02-09T10:00:00Z",
+    updated_at: "2026-02-09T10:00:00Z",
+  },
+  {
+    id: "e10",
+    venue_id: "v2",
+    name: "Festival Opening",
+    event_date: "2026-03-20",
+    start_time: "16:00",
+    end_time: "22:00",
+    created_by: "u3",
+    additional_information: "Opening ceremony and performances",
+    created_at: "2026-02-10T16:00:00Z",
+    updated_at: "2026-02-10T16:00:00Z",
+  },
+];
+
 const page = () => {
-  return <div className="flex h-dvh items-center justify-center uppercase">Events</div>;
+  return (
+    <div className="mx-auto">
+      <EventsPageHeader />
+      <EventsTable events={events} />
+    </div>
+  );
 };
 
 export default page;

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { createAPIClient } from "./lib/supabase/server-client";
+import { supabaseServer } from "./lib/supabase/server-client";
 import { authRoutes, publicRoutes } from "./constants/proxy";
 
 export async function proxy(req: NextRequest) {
@@ -17,7 +17,7 @@ export async function proxy(req: NextRequest) {
 
   const res = NextResponse.next();
 
-  const supabase = await createAPIClient();
+  const supabase = await supabaseServer();
   const { data } = await supabase.auth.getClaims();
 
   const claims = data?.claims ?? null;
@@ -28,7 +28,7 @@ export async function proxy(req: NextRequest) {
   const isPrivatePage = !isAuthPage && !isPublicPage;
 
   if (!hasClaims && isPrivatePage) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/signin", req.url));
   }
 
   if (hasClaims && isAuthPage) {

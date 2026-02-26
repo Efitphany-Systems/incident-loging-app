@@ -2,15 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
-import { useAuth } from "@/hooks/use-auth";
+import { usesignIn } from "@/hooks/use-signin";
 import { RHFInput } from "@/components/form/RHFInput";
 
-export default function LoginForm() {
+export default function SignInForm() {
   const {
     control,
     signIn,
     formState: { errors, isSubmitting },
-  } = useAuth();
+  } = usesignIn();
 
   return (
     <div className="bg-background flex min-h-dvh items-center justify-center">
