@@ -1,23 +1,13 @@
 import StaffTable from "./components/StaffTable";
 import StaffPageHeader from "./components/StaffPageHeader";
+import { getStaffAction } from "./action";
 
-const page = () => {
+export default async function StaffPage() {
+  const staff = await getStaffAction();
   return (
     <div className="mx-auto">
       <StaffPageHeader />
-      <StaffTable
-        staff={[
-          {
-            id: "1",
-            name: "John Doe",
-            email: "john.doe@example.com",
-            phone: "123-456-7890",
-            role: "admin",
-          },
-        ]}
-      />
+      <StaffTable staff={staff} />
     </div>
   );
-};
-
-export default page;
+}

@@ -75,7 +75,7 @@ export default function IncidentsTable({ incidents }: { incidents: IncidentsDumm
         {incidents.map((incident) => (
           <div
             key={incident.id}
-            className="border-border bg-muted/30 flex items-center justify-between rounded-lg border p-4"
+            className="border-border bg-muted/30 hover:bg-muted/50 flex items-center justify-between rounded-lg border p-4 transition hover:shadow-md"
           >
             <div className="flex-1">
               <div className="mb-1 flex items-center gap-3">

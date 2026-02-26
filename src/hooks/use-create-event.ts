@@ -9,7 +9,7 @@ export function useCreateEvent() {
     resolver: zodResolver(eventSchema),
   });
 
-  const createStaff = form.handleSubmit(async (data) => {
+  const createEvent = form.handleSubmit(async (data) => {
     try {
       await fetch("/api/staff", {
         method: "POST",
@@ -28,6 +28,6 @@ export function useCreateEvent() {
 
   return {
     ...form,
-    createStaff,
+    createEvent,
   };
 }

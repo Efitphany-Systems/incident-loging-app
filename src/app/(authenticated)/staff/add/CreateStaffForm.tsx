@@ -26,7 +26,7 @@ export default function CreateStaffForm() {
 
         <RHFInput
           control={control}
-          name="c-password"
+          name="cpassword"
           label="Confirm Password"
           placeholder="Enter confirm password number"
         />
