@@ -29,7 +29,7 @@ export function RHFDatePicker<T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => {
-        const value: Date | undefined = field.value;
+        const value: Date | undefined = field.value ? new Date(field.value) : undefined;
 
         return (
           <FormItem className="flex flex-col">
@@ -50,7 +50,16 @@ export function RHFDatePicker<T extends FieldValues>({
               </PopoverTrigger>
 
               <PopoverContent className="w-auto p-0">
-                <Calendar mode="single" selected={value} onSelect={field.onChange} disabled={disabled} initialFocus />
+                <Calendar
+                  mode="single"
+                  selected={value}
+                  onSelect={(date) => {
+                    if (!date) return;
+                    field.onChange(date.toISOString()); // ✅ string
+                  }}
+                  disabled={disabled}
+                  initialFocus
+                />
               </PopoverContent>
             </Popover>
 

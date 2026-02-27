@@ -2,21 +2,8 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { MoreVertical } from "lucide-react";
-
-export type EventDummy = {
-  id: string;
-  venue_id: string;
-  name: string;
-  event_date: string;
-  start_time: string | null;
-  end_time: string | null;
-  created_by: string | null;
-  additional_information: string | null;
-  created_at: string;
-  updated_at: string;
-};
+import { TableAction } from "./TableAction";
+import { Events } from "@/types/events";
 
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString(undefined, {
@@ -32,7 +19,7 @@ function formatTimeRange(start?: string | null, end?: string | null) {
   return start || end || "—";
 }
 
-export default function EventsTable({ events }: { events: EventDummy[] }) {
+export default function EventsTable({ events }: { events: Events }) {
   return (
     <Card className="md:bg-card text-card-foreground h-full space-y-1 border-0 bg-transparent p-4">
       {/* ===== Desktop ===== */}
@@ -65,9 +52,7 @@ export default function EventsTable({ events }: { events: EventDummy[] }) {
                 <TableCell>{formatTimeRange(event.start_time, event.end_time)}</TableCell>
 
                 <TableCell className="text-right">
-                  <Button variant="ghost" size="icon" className="rounded-full">
-                    <MoreVertical size={18} />
-                  </Button>
+                  <TableAction eventID={event.id} />
                 </TableCell>
               </TableRow>
             ))}
@@ -94,9 +79,7 @@ export default function EventsTable({ events }: { events: EventDummy[] }) {
             </div>
 
             {/* Actions */}
-            <Button variant="ghost" size="icon" className="ml-2 rounded-full">
-              <MoreVertical size={18} />
-            </Button>
+            <TableAction eventID={event.id} />
           </div>
         ))}
       </div>
