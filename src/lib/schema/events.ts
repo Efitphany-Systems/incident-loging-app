@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const eventSchema = z.object({
   venue_id: z.string().min(1, "venue id is required"),
+  name: z.string().min(3, "event name is required"),
   event_date: z.string("event date is required"),
   start_time: z.string("event start time is required"),
   end_time: z.string("event end time is required"),
@@ -9,3 +10,4 @@ export const eventSchema = z.object({
 });
 
 export type eventFormValues = z.infer<typeof eventSchema>;
+export type CreateEventPload = z.infer<typeof eventSchema>;

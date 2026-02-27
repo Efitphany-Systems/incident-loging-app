@@ -6,24 +6,25 @@ import { Card } from "@/components/ui/card";
 import { RHFInput } from "@/components/form/RHFInput";
 import { RHFSelect } from "@/components/form/RHFSelect";
 import { RHFDatePicker } from "@/components/form/RHFDate";
-import { useCreateEvent } from "@/hooks/use-create-event";
 import { FormProvider } from "react-hook-form";
 import { Venues } from "@/types/venues";
 import { RHFTimePicker } from "@/components/form/RHFTime";
+import { Event } from "@/types/events";
+import { useEditEvent } from "@/hooks/use-edit-event";
 
-export default function CreateEventForm({ venues }: { venues: Venues }) {
-  const form = useCreateEvent();
+export default function EditEventForm({ venues, event }: { venues: Venues; event: Event }) {
+  const form = useEditEvent(event);
 
   const {
     control,
-    createEvent,
+    updateEvent,
     formState: { errors, isSubmitting },
   } = form;
 
   return (
     <Card className="md:bg-card text-card-foreground h-full space-y-1 border-0 bg-transparent p-4 md:shadow-sm">
       <FormProvider {...form}>
-        <form onSubmit={createEvent} className="space-y-5">
+        <form onSubmit={updateEvent} className="space-y-5">
           <RHFSelect
             control={control}
             name="venue_id"
@@ -54,7 +55,7 @@ export default function CreateEventForm({ venues }: { venues: Venues }) {
           )}
           <div className="flex justify-end">
             <Button type="submit" variant="primary" size="xl" className="w-full lg:w-64" disabled={isSubmitting}>
-              {isSubmitting ? <Loader className="animate-spin" /> : "Create Event"}
+              {isSubmitting ? <Loader className="animate-spin" /> : "Update Event"}
             </Button>
           </div>
         </form>
