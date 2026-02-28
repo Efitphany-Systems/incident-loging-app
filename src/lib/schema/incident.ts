@@ -5,15 +5,17 @@ const eventAndFillerInformation = z.object({
   show: z.string().min(10, "Please select a show."),
   wearsGlasses: z.enum(["yes", "no"]),
   inUse: z.enum(["yes", "no"]),
+  severity: z.enum(["low", "medium", "high"]),
+  description: z.string().optional(),
 });
 
 const patronInformation = z.object({
   name: z.string("Enter a valid name"),
   phone: z.string("Enter a valid phone number"),
   email: z.email("Enter a valid email address"),
-  address: z.string("Enter street address"),
-  cityState: z.string("Enter city, state, and zip code"),
   contactTime: z.string("Enter preferred contact time"),
+  address_street: z.string("Enter street address"),
+  address_city: z.string("Enter city, state, and zip code"),
 });
 
 const witnessSchema = z.object({

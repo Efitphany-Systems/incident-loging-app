@@ -1,4 +1,4 @@
-import { createIncidentAction } from "@/app/(authenticated)/incidents/add/[name]/action";
+import { createIncidentAction } from "@/app/(authenticated)/incidents/add/[name]/[id]/action";
 import { IncidentFormValues, incidentSchema } from "@/lib/schema/incident";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -14,6 +14,8 @@ export function useIncidentForm(initialCategory: string) {
         show: "",
         wearsGlasses: "no",
         inUse: "yes",
+        severity: "low",
+        description: "",
       },
       witnesses: [],
       medical: undefined,

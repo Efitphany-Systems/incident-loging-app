@@ -50,3 +50,9 @@ export const YesNoOptions = [
   { label: "Yes", value: "yes" },
   { label: "No", value: "no" },
 ];
+
+export const SeverityOptions = [
+  { label: "Low", value: "low" },
+  { label: "Medium", value: "medium" },
+  { label: "High", value: "high" },
+];

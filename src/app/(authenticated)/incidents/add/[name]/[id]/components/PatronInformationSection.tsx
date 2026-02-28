@@ -37,13 +37,13 @@ export default function PatronInformationSection() {
       />
       <RHFInput
         control={control}
-        name="patronInformation.address"
+        name="patronInformation.address_street"
         label={IncidentReportHeaders.patronAddress}
         placeholder="Enter street address"
       />
       <RHFInput
         control={control}
-        name="patronInformation.cityState"
+        name="patronInformation.address_city"
         label={IncidentReportHeaders.patronCityState}
         placeholder="Enter city, state, and zip code"
       />

@@ -1,9 +1,10 @@
 "use client";
 
+import { RHFInput } from "@/components/form/RHFInput";
 import { RHFRadio } from "@/components/form/RHFRadio";
 import { RHFSelect } from "@/components/form/RHFSelect";
 import { Card } from "@/components/ui/card";
-import { YesNoOptions } from "@/constants/app";
+import { SeverityOptions, YesNoOptions } from "@/constants/app";
 import { IncidentReportHeaders } from "@/constants/incidents";
 import { Events } from "@/types/events";
 import { useFormContext } from "react-hook-form";
@@ -39,6 +40,20 @@ export default function EventAndFillerInformation({ events }: { events: Events }
         name="eventAndFillerInformation.inUse"
         label={IncidentReportHeaders.inUse}
         options={YesNoOptions}
+      />
+
+      <RHFRadio
+        control={control}
+        name="eventAndFillerInformation.severity"
+        label={IncidentReportHeaders.severity}
+        options={SeverityOptions}
+      />
+
+      <RHFInput
+        name="eventAndFillerInformation.description"
+        control={control}
+        label="Description"
+        placeholder="Description for incident"
       />
     </Card>
   );
