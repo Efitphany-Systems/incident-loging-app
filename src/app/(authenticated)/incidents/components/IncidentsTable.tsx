@@ -2,16 +2,8 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { MoreVertical } from "lucide-react";
-
-export type IncidentsDummy = {
-  id: string;
-  time: string | null;
-  type: string | null;
-  location: string | null;
-  severity: string | null;
-};
+import { TableAction } from "./TableAction";
+import { Incidents } from "@/types/incidents";
 
 function getSeverityColor(severity?: string | null) {
   switch (severity?.toLowerCase()) {
@@ -26,7 +18,7 @@ function getSeverityColor(severity?: string | null) {
   }
 }
 
-export default function IncidentsTable({ incidents }: { incidents: IncidentsDummy[] }) {
+export default function IncidentsTable({ incidents }: { incidents: Incidents }) {
   return (
     <Card className="md:bg-card text-card-foreground h-full space-y-1 border-0 bg-transparent p-4">
       {/* ===== Desktop Table ===== */}
@@ -57,10 +49,8 @@ export default function IncidentsTable({ incidents }: { incidents: IncidentsDumm
                 <TableCell>{incident.type || "—"}</TableCell>
                 <TableCell className="capitalize">{incident.location}</TableCell>
                 <TableCell>{incident.severity || "—"}</TableCell>
-                <TableCell className="text-right">
-                  <Button variant="ghost" size="icon" className="rounded-full">
-                    <MoreVertical size={18} />
-                  </Button>
+                <TableCell className="flex justify-end">
+                  <TableAction ID={incident.id} />
                 </TableCell>
               </TableRow>
             ))}
@@ -91,9 +81,7 @@ export default function IncidentsTable({ incidents }: { incidents: IncidentsDumm
                 {incident.severity || "—"}
               </span>
 
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <MoreVertical size={18} />
-              </Button>
+              <TableAction ID={incident.id} />
             </div>
           </div>
         ))}

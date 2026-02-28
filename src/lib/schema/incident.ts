@@ -86,5 +86,6 @@ export const incidentSchema = z.object({
 });
 
 export type IncidentFormValues = z.infer<typeof incidentSchema>;
+export type IncidentPayload = z.infer<typeof incidentSchema>;
 export type Medical = z.infer<typeof medicalSchema>;
 export type LawEnforcement = z.infer<typeof lawEnforcementSchema>;

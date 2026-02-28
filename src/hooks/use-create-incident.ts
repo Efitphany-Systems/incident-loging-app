@@ -1,3 +1,4 @@
+import { createIncidentAction } from "@/app/(authenticated)/incidents/add/[name]/action";
 import { IncidentFormValues, incidentSchema } from "@/lib/schema/incident";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -22,10 +23,11 @@ export function useIncidentForm(initialCategory: string) {
 
   const reportIncident = IncedentReportingForm.handleSubmit(async (data: IncidentFormValues) => {
     try {
-      console.log("working fine!");
-
-      console.log(data);
-      router.replace("/todays-incidents");
+      const response = await createIncidentAction(data);
+      if (response.success) {
+        IncedentReportingForm.reset();
+        router.replace("/incidents");
+      }
     } catch (e) {
       IncedentReportingForm.setError("root", {
         type: "server",

@@ -51,7 +51,7 @@ export default function EventsTable({ events }: { events: Events }) {
 
                 <TableCell>{formatTimeRange(event.start_time, event.end_time)}</TableCell>
 
-                <TableCell className="text-right">
+                <TableCell className="flex justify-end">
                   <TableAction eventID={event.id} />
                 </TableCell>
               </TableRow>

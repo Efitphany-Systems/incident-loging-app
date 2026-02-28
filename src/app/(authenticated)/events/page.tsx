@@ -2,7 +2,7 @@ import EventsPageHeader from "./components/EventsPageHeader";
 import { getEventsAction } from "./action";
 import EventsTable from "./components/EventsTable";
 
-const page = async () => {
+export default async function EventsPage() {
   const events = await getEventsAction();
   return (
     <div className="mx-auto">
@@ -10,6 +10,4 @@ const page = async () => {
       <EventsTable events={events} />
     </div>
   );
-};
-
-export default page;
+}

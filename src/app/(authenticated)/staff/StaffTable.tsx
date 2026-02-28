@@ -53,7 +53,7 @@ export default function StaffTable({ staff }: { staff: Staff[] }) {
 
                 <TableCell>{staff.phone || "—"}</TableCell>
 
-                <TableCell className="text-right">
+                <TableCell className="flex justify-end">
                   <TableAction staffID={staff.id} />
                 </TableCell>
               </TableRow>

@@ -10,8 +10,9 @@ import EventAndFillerInformation from "./EventAndFillerInformation";
 import { useIncidentForm } from "@/hooks/use-create-incident";
 import { FormProvider } from "react-hook-form";
 import { defaultLaw, defaultMedical } from "@/constants/incidents";
+import { Events } from "@/types/events";
 
-export default function IncidentReportForm({ category }: { category: string }) {
+export default function IncidentReportForm({ category, events }: { category: string; events: Events }) {
   const form = useIncidentForm(category);
   const medicalSection = form.watch("medical");
   const lawSection = form.watch("lawEnforcement");
@@ -25,7 +26,7 @@ export default function IncidentReportForm({ category }: { category: string }) {
       <form onSubmit={form.reportIncident} className="space-y-4">
         <div className="flex w-full flex-col items-stretch gap-4 lg:flex-row">
           <div className="w-full lg:flex-1">
-            <EventAndFillerInformation />
+            <EventAndFillerInformation events={events} />
           </div>
           <div className="w-full lg:flex-1">
             <PatronInformationSection />

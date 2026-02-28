@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MoreVertical } from "lucide-react";
 import { Venues } from "@/types/venues";
+import { TableAction } from "./TableAction";
 
 export default function VenuesTable({ venues }: { venues: Venues }) {
   return (
@@ -37,10 +38,8 @@ export default function VenuesTable({ venues }: { venues: Venues }) {
                 <TableCell>{venue.address}</TableCell>
                 <TableCell>{venue.additional_information}</TableCell>
 
-                <TableCell className="text-right">
-                  <Button variant="ghost" size="icon" className="rounded-full">
-                    <MoreVertical size={18} />
-                  </Button>
+                <TableCell aria-disabled="true" className="flex justify-end">
+                  <TableAction venueID={venue.id} />
                 </TableCell>
               </TableRow>
             ))}
