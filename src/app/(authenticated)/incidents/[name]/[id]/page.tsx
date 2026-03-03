@@ -1,14 +1,14 @@
-import { getTodaysEventsAction } from "@/app/(authenticated)/events/action";
+import { getTodaysEventsAction } from "@/app/(authenticated)/(admin)/events/action";
 import EditIncidentReportForm from "./EditIncidentReportForm";
 import AddEditIncidentPageHeader from "../../components/AddEditIncidentPageHeader";
-import { getIncidentBuIDAction, getLocationsByVenueAction } from "../../action";
+import { getIncidentByIDAction, getLocationsByVenueAction } from "../../action";
 
 export default async function Page({ params }: { params: Promise<{ name: string; id: string }> }) {
   const extractedParams = await params;
   const name = decodeURIComponent(extractedParams.name);
 
   const events = await getTodaysEventsAction();
-  const incident = await getIncidentBuIDAction(extractedParams.id);
+  const incident = await getIncidentByIDAction(extractedParams.id);
   /**
    * TODO
    * ** venue is single now so in future we will pass selected vanue from here

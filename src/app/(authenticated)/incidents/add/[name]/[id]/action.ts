@@ -11,7 +11,7 @@ export async function createIncidentAction(payload: IncidentPayload) {
   const { medical, law, ...rest } = payload;
 
   if (user && user.role == "admin") {
-    const { error } = await supabase.rpc("create_new_incident_fun", {
+    const { error } = await supabase.rpc("create_incident_function", {
       payload: {
         ...rest,
         user_id: user.id,

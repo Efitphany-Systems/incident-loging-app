@@ -35,7 +35,8 @@ export async function getLocationsByVenueAction(VENUE_ID: string) {
   return data;
 }
 
-export async function getIncidentBuIDAction(ID: string) {
+export async function getIncidentByIDAction(ID: string) {
+  // move this implemenation to view
   const supabase = await supabaseServer();
   const { data, error } = await supabase
     .from("incidents")
@@ -83,6 +84,8 @@ export async function getIncidentBuIDAction(ID: string) {
       name: data?.patron[0]?.name,
       email: data?.patron[0]?.email,
       phone: data?.patron[0]?.phone,
+      gender: data?.patron[0]?.gender,
+      age: data?.patron[0]?.age,
       contact_time: data?.patron[0]?.contact_time,
       address_street: data?.patron[0]?.address_street,
       address_city: data?.patron[0]?.address_city,

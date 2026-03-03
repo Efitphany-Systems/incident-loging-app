@@ -3,4 +3,5 @@ export interface MenuItem {
   title: string;
   subtitle?: string;
   href: string;
+  roles: string[];
 }

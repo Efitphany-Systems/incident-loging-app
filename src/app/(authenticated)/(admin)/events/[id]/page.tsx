@@ -1,7 +1,7 @@
 import PageHeader from "@/components/layouts/PageHeader";
 import EditEventForm from "./EditEventForm";
-import { getVenuesAction } from "../../venues/action";
 import { getEventByID } from "./action";
+import { getVenuesAction } from "../../venues/action";
 
 export default async function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
   const extractedParams = await params;

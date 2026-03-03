@@ -1,4 +1,4 @@
-import { getTodaysEventsAction } from "@/app/(authenticated)/events/action";
+import { getTodaysEventsAction } from "@/app/(authenticated)/(admin)/events/action";
 import IncidentReportForm from "./components/IncidentReportForm";
 import AddEditIncidentPageHeader from "../../../components/AddEditIncidentPageHeader";
 import { getLocationsByVenueAction } from "../../../action";

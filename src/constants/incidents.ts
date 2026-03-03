@@ -12,6 +12,8 @@ export const IncidentReportHeaders = {
   patronName: "Patron Name",
   patronPhone: "Patron Phone",
   patronEmail: "Patron Email",
+  patronGender: "Gender",
+  patronAge: "Age",
   patronAddress: "Patron Address",
   patronCityState: "Patron City/State",
   patronContactTime: "Best Contact Time",

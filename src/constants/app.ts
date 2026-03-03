@@ -1,3 +1,4 @@
+import { UserRole } from "@/lib/roles";
 import { MenuItem } from "@/types/home";
 
 export const APP_NAME = "Efitphany Systems";
@@ -7,16 +8,19 @@ export const menuItems: MenuItem[] = [
     id: "dashboard",
     title: "DASHBOARD",
     href: "/",
+    roles: [UserRole.ADMIN, UserRole.STAFF],
   },
   {
     id: "events",
     title: "EVENTS",
     href: "/events",
+    roles: [UserRole.ADMIN],
   },
   {
     id: "incidents",
     title: "INCIDENTS",
     href: "/incidents",
+    roles: [UserRole.ADMIN, UserRole.STAFF],
   },
   // {
   //   id: "assigned-zones",
@@ -32,11 +36,13 @@ export const menuItems: MenuItem[] = [
     id: "staff-management",
     title: "STAFF MANAGEMENT",
     href: "/staff",
+    roles: [UserRole.ADMIN],
   },
   {
     id: "venues",
     title: "ALL VENUES",
     href: "/venues",
+    roles: [UserRole.ADMIN],
   },
 ];
 

@@ -36,6 +36,8 @@ begin
     email = payload->'patron'->>'email',
     phone = payload->'patron'->>'phone',
     contact_time = payload->'patron'->>'contact_time',
+    gender = payload->'patron'->>'gender',
+    age = (payload->'patron'->>'age')::numeric,
     address_street = payload->'patron'->>'address_street',
     address_city = payload->'patron'->>'address_city'
   where incident_id = p_incident_id;

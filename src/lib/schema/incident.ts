@@ -14,6 +14,8 @@ const patronInformation = z.object({
   name: z.string("Enter a valid name"),
   phone: z.string("Enter a valid phone number"),
   email: z.email("Enter a valid email address"),
+  gender: z.string("Select a gender"),
+  age: z.number("Enter a valid age in numbers between 1-99"),
   contact_time: z.string("Enter preferred contact time"),
   address_street: z.string("Enter street address"),
   address_city: z.string("Enter city, state, and zip code"),

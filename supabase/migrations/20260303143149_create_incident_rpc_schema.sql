@@ -1,4 +1,4 @@
-create or replace function create_new_incident_fun(payload jsonb)
+create or replace function create_incident_function(payload jsonb)
 returns uuid
 language plpgsql
 as $$
@@ -54,15 +54,20 @@ begin
     email,
     phone,
     contact_time,
+    gender,
+    age,
     address_street,
     address_city
   )
   values (
+    
     new_incident_id,
     payload->'patron'->>'name',
     payload->'patron'->>'email',
     payload->'patron'->>'phone',
     payload->'patron'->>'contact_time',
+    payload->'patron'->>'gender',
+    (payload->'patron'->>'age')::numeric,
     payload->'patron'->>'address_street',
     payload->'patron'->>'address_city'
   );

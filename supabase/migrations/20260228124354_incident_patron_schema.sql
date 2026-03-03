@@ -14,6 +14,8 @@ create table if not exists public.patron (
 
   address_street text,
   address_city text,
+  age numaric,
+  gender text,
 
   created_at timestamptz default now(),
   updated_at timestamptz default now()

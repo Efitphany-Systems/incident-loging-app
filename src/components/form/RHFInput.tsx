@@ -19,6 +19,11 @@ type RHFInputProps<TFieldValues extends FieldValues> = {
 
   className?: string;
   inputClassName?: string;
+
+  /** Optional enhancements */
+  integerOnly?: boolean;
+  min?: number;
+  max?: number;
 };
 
 export function RHFInput<TFieldValues extends FieldValues>({
@@ -32,13 +37,42 @@ export function RHFInput<TFieldValues extends FieldValues>({
   disabled,
   className,
   inputClassName,
+  integerOnly = false,
+  min,
+  max,
 }: RHFInputProps<TFieldValues>) {
+  const isNumeric = type === "number";
+
   return (
     <Controller
       control={control}
       name={name}
       render={({ field, fieldState }) => {
         const error = fieldState.error?.message;
+
+        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+          let value: string | number = e.target.value;
+
+          if (isNumeric) {
+            if (value === "") {
+              field.onChange("");
+              return;
+            }
+
+            let parsed = Number(value);
+
+            if (integerOnly) {
+              parsed = Math.trunc(parsed);
+            }
+
+            if (min !== undefined && parsed < min) parsed = min;
+            if (max !== undefined && parsed > max) parsed = max;
+
+            field.onChange(parsed);
+          } else {
+            field.onChange(value);
+          }
+        };
 
         return (
           <div className={cn("space-y-2", className)}>
@@ -54,9 +88,12 @@ export function RHFInput<TFieldValues extends FieldValues>({
               type={type}
               placeholder={placeholder}
               disabled={disabled}
+              min={min}
+              max={max}
               className={cn(error && "border-destructive", inputClassName)}
               {...field}
               value={field.value ?? ""}
+              onChange={handleChange}
             />
 
             {description && !error && <p className="text-muted-foreground text-xs">{description}</p>}

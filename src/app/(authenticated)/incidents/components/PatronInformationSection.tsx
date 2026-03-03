@@ -1,6 +1,7 @@
 "use client";
 
 import { RHFInput } from "@/components/form/RHFInput";
+import { RHFSelect } from "@/components/form/RHFSelect";
 import { Card } from "@/components/ui/card";
 import { IncidentReportHeaders } from "@/constants/incidents";
 import { useFormContext } from "react-hook-form";
@@ -35,6 +36,32 @@ export default function PatronInformationSection() {
         label={IncidentReportHeaders.patronContactTime}
         placeholder="E.g., Evenings after 5pm"
       />
+
+      <RHFSelect
+        control={control}
+        name="patron.gender"
+        label={IncidentReportHeaders.patronGender}
+        placeholder="Select gender"
+        options={[
+          {
+            label: "Male",
+            value: "male",
+          },
+          {
+            label: "Female",
+            value: "female",
+          },
+        ]}
+      />
+
+      <RHFInput
+        type="number"
+        control={control}
+        name="patron.age"
+        label={IncidentReportHeaders.patronAge}
+        placeholder="Enter age"
+      />
+
       <RHFInput
         control={control}
         name="patron.address_street"

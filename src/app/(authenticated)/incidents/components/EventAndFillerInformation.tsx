@@ -1,8 +1,8 @@
 "use client";
 
-import { RHFInput } from "@/components/form/RHFInput";
 import { RHFRadio } from "@/components/form/RHFRadio";
 import { RHFSelect } from "@/components/form/RHFSelect";
+import { RHFTextarea } from "@/components/form/RHFTextarea";
 import { Card } from "@/components/ui/card";
 import { SeverityOptions, YesNoOptions } from "@/constants/app";
 import { IncidentReportHeaders } from "@/constants/incidents";
@@ -63,11 +63,12 @@ export default function EventAndFillerInformation({ events, locations }: { event
         />
       </div>
 
-      <RHFInput
-        name="eventAndFillerInformation.description"
+      <RHFTextarea
         control={control}
+        name="eventAndFillerInformation.description"
         label="Description"
-        placeholder="Description for incident"
+        placeholder="Enter incident details..."
+        maxRows={8}
       />
     </Card>
   );
