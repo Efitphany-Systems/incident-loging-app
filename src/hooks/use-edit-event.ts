@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { eventFormValues, eventSchema } from "@/lib/schema/events";
 import { handleAsync } from "@/lib/form/handleAsync";
 import { Event } from "@/types/events";
-import { updateEventAction } from "@/app/(authenticated)/events/[id]/action";
+import { updateEventAction } from "@/app/(authenticated)/(admin)/events/[id]/action";
 import { useRouter } from "next/navigation";
 
 export function useEditEvent(event: Event) {

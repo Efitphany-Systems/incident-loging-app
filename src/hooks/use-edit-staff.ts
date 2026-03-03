@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UpdateStaffFormValues, updateStaffSchema } from "@/lib/schema/staff";
 import { useRouter } from "next/navigation";
 import { Staff } from "@/types/staff";
-import { updateStaffAction } from "@/app/(authenticated)/staff/[id]/actions";
+import { updateStaffAction } from "@/app/(authenticated)/(admin)/staff/[id]/actions";
 
 export function useEditStaff(staff: Staff) {
   const router = useRouter();

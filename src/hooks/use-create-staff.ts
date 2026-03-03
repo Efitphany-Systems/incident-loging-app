@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateStaffFormValues, createStaffSchema } from "@/lib/schema/staff";
-import { createStaffAction } from "@/app/(authenticated)/staff/add/actions";
+import { createStaffAction } from "@/app/(authenticated)/(admin)/staff/add/actions";
 import { useRouter } from "next/navigation";
 
 export function useCreateStaff() {

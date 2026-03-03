@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/components/AuthProvider";
 import {
   SidebarContent,
   SidebarGroup,
@@ -9,12 +10,14 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { menuItems } from "@/constants/app";
+import { menu } from "@/utils/menu.selector";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Content = () => {
   const pathname = usePathname();
+  const user = useAuth();
+  const menuItems = user?.role ? menu(user.role) : [];
   const { setOpenMobile } = useSidebar();
   return (
     <SidebarContent>
@@ -22,7 +25,8 @@ const Content = () => {
         <SidebarGroupContent>
           <SidebarMenu>
             {menuItems.map((item) => {
-              const active = pathname === item.href;
+              const active =
+                item.href === "/" ? pathname === "/" : pathname === item.href || pathname.startsWith(`${item.href}/`);
 
               return (
                 <SidebarMenuItem key={item.id}>

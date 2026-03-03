@@ -2,16 +2,9 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { MoreVertical } from "lucide-react";
-
-export type IncidentsDummy = {
-  id: string;
-  time: string | null;
-  type: string | null;
-  location: string | null;
-  severity: string | null;
-};
+import { TableAction } from "./TableAction";
+import { Incidents } from "@/types/incidents";
+import { FORMAT_DATE_TIME } from "@/utils/datetime";
 
 function getSeverityColor(severity?: string | null) {
   switch (severity?.toLowerCase()) {
@@ -26,7 +19,7 @@ function getSeverityColor(severity?: string | null) {
   }
 }
 
-export default function IncidentsTable({ incidents }: { incidents: IncidentsDummy[] }) {
+export default function IncidentsTable({ incidents }: { incidents: Incidents }) {
   return (
     <Card className="md:bg-card text-card-foreground h-full space-y-1 border-0 bg-transparent p-4">
       {/* ===== Desktop Table ===== */}
@@ -35,7 +28,7 @@ export default function IncidentsTable({ incidents }: { incidents: IncidentsDumm
           <TableHeader>
             <TableRow>
               <TableHead>Time</TableHead>
-              <TableHead>Type</TableHead>
+              <TableHead>Category</TableHead>
               <TableHead>Location</TableHead>
               <TableHead>Severity</TableHead>
               <TableHead className="text-right">Actions</TableHead>
@@ -53,14 +46,20 @@ export default function IncidentsTable({ incidents }: { incidents: IncidentsDumm
 
             {incidents.map((incident) => (
               <TableRow key={incident.id}>
-                <TableCell className="font-medium">{incident.time || "—"}</TableCell>
-                <TableCell>{incident.type || "—"}</TableCell>
+                <TableCell className="font-medium">
+                  {FORMAT_DATE_TIME(incident.created_at) || <TableCell>{incident.severity || "—"}</TableCell>}
+                </TableCell>
+                <TableCell>{incident.category || <TableCell>{incident.severity || "—"}</TableCell>}</TableCell>
                 <TableCell className="capitalize">{incident.location}</TableCell>
-                <TableCell>{incident.severity || "—"}</TableCell>
-                <TableCell className="text-right">
-                  <Button variant="ghost" size="icon" className="rounded-full">
-                    <MoreVertical size={18} />
-                  </Button>
+                <TableCell>
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${getSeverityColor(incident.severity)}`}
+                  >
+                    {incident.severity || "—"}
+                  </span>
+                </TableCell>
+                <TableCell className="flex justify-end">
+                  <TableAction ID={incident.id} category={incident.category} />
                 </TableCell>
               </TableRow>
             ))}
@@ -79,8 +78,8 @@ export default function IncidentsTable({ incidents }: { incidents: IncidentsDumm
           >
             <div className="flex-1">
               <div className="mb-1 flex items-center gap-3">
-                <span className="font-semibold">{incident.type || "—"}</span>
-                <span className="text-muted-foreground text-xs">{incident.time || "—"}</span>
+                <span className="font-semibold">{FORMAT_DATE_TIME(incident.created_at) || "—"}</span>
+                <span className="text-muted-foreground text-xs">{incident.category || "—"}</span>
               </div>
 
               <p className="text-muted-foreground text-sm capitalize">{incident.location || "—"}</p>
@@ -91,9 +90,7 @@ export default function IncidentsTable({ incidents }: { incidents: IncidentsDumm
                 {incident.severity || "—"}
               </span>
 
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <MoreVertical size={18} />
-              </Button>
+              <TableAction ID={incident.id} category={incident.category} />
             </div>
           </div>
         ))}

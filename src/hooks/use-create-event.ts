@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { eventFormValues, eventSchema } from "@/lib/schema/events";
-import { createEventAction } from "@/app/(authenticated)/events/add/action";
+import { createEventAction } from "@/app/(authenticated)/(admin)/events/add/action";
 import { handleAsync } from "@/lib/form/handleAsync";
 import { useRouter } from "next/navigation";
 

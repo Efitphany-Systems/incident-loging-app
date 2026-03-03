@@ -1,31 +1,35 @@
+import { createIncidentAction } from "@/app/(authenticated)/incidents/add/[name]/[id]/action";
 import { IncidentFormValues, incidentSchema } from "@/lib/schema/incident";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-export function useIncidentForm(initialCategory: string) {
+export function useCreateIncidentForm(category_id: string) {
   const router = useRouter();
   const IncedentReportingForm = useForm<IncidentFormValues>({
     resolver: zodResolver(incidentSchema),
     defaultValues: {
       eventAndFillerInformation: {
-        category: initialCategory,
-        show: "",
-        wearsGlasses: "no",
-        inUse: "yes",
+        category_id: category_id,
+        event_id: "",
+        wears_glasses: true,
+        in_use: true,
+        severity: "low",
+        description: "",
       },
       witnesses: [],
-      medical: undefined,
-      lawEnforcement: undefined,
+      medical: null,
+      law: null,
     },
   });
 
-  const reportIncident = IncedentReportingForm.handleSubmit(async (data: IncidentFormValues) => {
+  const form = IncedentReportingForm.handleSubmit(async (data: IncidentFormValues) => {
     try {
-      console.log("working fine!");
-
-      console.log(data);
-      router.replace("/todays-incidents");
+      const response = await createIncidentAction(data);
+      if (response.success) {
+        IncedentReportingForm.reset();
+        router.replace("/incidents");
+      }
     } catch (e) {
       IncedentReportingForm.setError("root", {
         type: "server",
@@ -34,5 +38,5 @@ export function useIncidentForm(initialCategory: string) {
     }
   });
 
-  return { ...IncedentReportingForm, reportIncident };
+  return { ...IncedentReportingForm, form };
 }
