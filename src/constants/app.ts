@@ -47,12 +47,17 @@ export const eventInfo = {
 };
 
 export const YesNoOptions = [
-  { label: "Yes", value: "yes" },
-  { label: "No", value: "no" },
+  { label: "Yes", value: true },
+  { label: "No", value: false },
 ];
 
 export const SeverityOptions = [
   { label: "Low", value: "low" },
   { label: "Medium", value: "medium" },
   { label: "High", value: "high" },
+];
+
+export const WitnessEmplymentTypesOptions = [
+  { label: "Employee", value: true },
+  { label: "Non Employee", value: false },
 ];

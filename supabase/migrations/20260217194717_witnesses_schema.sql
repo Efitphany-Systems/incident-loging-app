@@ -8,7 +8,9 @@ create table if not exists public.witnesses (
         references public.incidents(id)
         on delete cascade,
 
-    contact_time timestamptz,
+    phone text,
+    contact_time text,
+
     employee boolean not null default false,
 
     created_at timestamptz not null default now(),

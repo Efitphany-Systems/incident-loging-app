@@ -13,7 +13,7 @@ create table if not exists public.patron (
   contact_time text,
 
   address_street text,
-  address_city text
+  address_city text,
 
   created_at timestamptz default now(),
   updated_at timestamptz default now()

@@ -16,73 +16,73 @@ export default function MedicalInformationSection() {
 
       <RHFRadio
         control={control}
-        name="medical.visibleInjuries"
+        name="medical.visible_injuries"
         label={IncidentReportHeaders.VisibleInjuries}
         options={YesNoOptions}
       />
 
       <RHFInput
         control={control}
-        name="medical.visibleInjuriesExplain"
+        name="medical.injury_explanation"
         label={IncidentReportHeaders.VisibleInjuriesExplain}
         placeholder="Describe injuries if any"
       />
 
       <RHFRadio
         control={control}
-        name="medical.medicalAttention"
+        name="medical.medical_attention_apparent"
         label={IncidentReportHeaders.MedicalAttention}
         options={YesNoOptions}
       />
 
       <RHFRadio
         control={control}
-        name="medical.offeredMedical"
+        name="medical.medical_services_offered"
         label={IncidentReportHeaders.medicalServiceOffered}
         options={YesNoOptions}
       />
 
       <RHFRadio
         control={control}
-        name="medical.accepted"
+        name="medical.medical_services_accepted"
         label={IncidentReportHeaders.medicalAccepted}
         options={[
-          { label: "ACCEPTED", value: "yes" },
-          { label: "REFUSED", value: "no" },
+          { label: "ACCEPTED", value: true },
+          { label: "REFUSED", value: false },
         ]}
       />
 
       <RHFRadio
         control={control}
-        name="medical.ambulanceRequested"
+        name="medical.ambulance_requested"
         label={IncidentReportHeaders.ambulanceRequested}
         options={YesNoOptions}
       />
 
       <RHFInput
         control={control}
-        name="medical.ambulanceCompany"
+        name="medical.ambulance_company"
         label={IncidentReportHeaders.ambulanceCompany}
         placeholder="Ambulance company name"
       />
 
       <RHFInput
         control={control}
-        name="medical.ambulanceEMT"
+        name="medical.emt_name_or_number"
         label={IncidentReportHeaders.ambulanceEMT}
         placeholder="EMT info"
       />
 
       <RHFRadio
         control={control}
-        name="medical.didPatientLeaveAmbulance"
+        name="medical.patron_left_in_ambulance"
         label={IncidentReportHeaders.didPatientLeaveAmbulance}
         options={YesNoOptions}
       />
 
       <RHFInput
         control={control}
-        name="medical.whereTheyGo"
+        name="medical.destination"
         label={IncidentReportHeaders.whereTheyGo}
         placeholder="Where did they go?"
       />

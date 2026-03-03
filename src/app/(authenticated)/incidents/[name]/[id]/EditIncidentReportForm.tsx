@@ -1,28 +1,29 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import PatronInformationSection from "../../../../components/PatronInformationSection";
-import WitnessSection from "../../../../components/WitnessSection";
-import MedicalInformationSection from "../../../../components/MedicalInformationSection";
-import LawEnforcementSection from "../../../../components/LawEnforcementSection";
-import EventAndFillerInformation from "../../../../components/EventAndFillerInformation";
-import { defaultLaw, defaultMedical } from "@/constants/incidents";
-import { useCreateIncidentForm } from "@/hooks/use-create-incident";
 import { Ambulance, Loader, Scale } from "lucide-react";
 import { FormProvider } from "react-hook-form";
-import { Locations } from "@/types/locations";
+import { defaultLaw, defaultMedical } from "@/constants/incidents";
 import { Events } from "@/types/events";
+import { Locations } from "@/types/locations";
+import EventAndFillerInformation from "../../components/EventAndFillerInformation";
+import PatronInformationSection from "../../components/PatronInformationSection";
+import MedicalInformationSection from "../../components/MedicalInformationSection";
+import LawEnforcementSection from "../../components/LawEnforcementSection";
+import WitnessSection from "../../components/WitnessSection";
+import { IncidentReport } from "@/types/incidents";
+import { useEditIncidentForm } from "@/hooks/use-edit-incident";
 
-export default function IncidentReportForm({
-  category_id,
+export default function EditIncidentReportForm({
   events,
   locations,
+  incident,
 }: {
-  category_id: string;
   events: Events;
   locations: Locations;
+  incident: IncidentReport;
 }) {
-  const form = useCreateIncidentForm(category_id);
+  const form = useEditIncidentForm(incident);
   const medicalSection = form.watch("medical");
   const lawSection = form.watch("law");
   const enableMedical = () => form.setValue("medical", defaultMedical);
@@ -32,7 +33,7 @@ export default function IncidentReportForm({
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.form} className="space-y-4">
+      <form onSubmit={form.reportIncident} className="space-y-4">
         <div className="flex w-full flex-col items-stretch gap-4 lg:flex-row">
           <div className="w-full lg:flex-1">
             <EventAndFillerInformation events={events} locations={locations} />
@@ -91,8 +92,8 @@ export default function IncidentReportForm({
             size="xl"
             type="submit"
             variant="primary"
-            // disabled={form.formState.isSubmitting}
-            className="w-full cursor-pointer lg:w-64"
+            disabled={form.formState.isSubmitting}
+            className="w-full lg:w-64"
           >
             {form.formState.isSubmitting ? <Loader className="animate-spin" /> : "SUBMIT INCIDENT REPORT"}
           </Button>

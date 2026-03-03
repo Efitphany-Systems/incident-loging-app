@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
-import { getIncidentCategoriesAction } from "./action";
 import { INCIDENT_ICON_MAP } from "@/lib/incident-icons";
+import { getIncidentCategoriesAction } from "../action";
 
 const IncidentCategorySelector = async () => {
   const IncidentCategories = await getIncidentCategoriesAction();

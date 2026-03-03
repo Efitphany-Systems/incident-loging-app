@@ -16,42 +16,42 @@ export default function LawEnforcementSection() {
 
       <RHFRadio
         control={control}
-        name="lawEnforcement.contacted"
+        name="law.law_enforcement_contacted"
         label={IncidentReportHeaders.contacted}
         options={YesNoOptions}
       />
 
       <RHFInput
         control={control}
-        name="lawEnforcement.explanation"
+        name="law.contact_explanation"
         label={IncidentReportHeaders.explanation}
         placeholder="Provide explanation"
       />
 
       <RHFRadio
         control={control}
-        name="lawEnforcement.reportWritten"
+        name="law.police_report_written"
         label={IncidentReportHeaders.reportWritten}
         options={YesNoOptions}
       />
 
       <RHFInput
         control={control}
-        name="lawEnforcement.reportNumber"
+        name="law.police_report_number"
         label={IncidentReportHeaders.reportNumber}
         placeholder="Police report number"
       />
 
       <RHFInput
         control={control}
-        name="lawEnforcement.citation"
+        name="law.citation_or_charge_or_arrest"
         label={IncidentReportHeaders.citation}
         placeholder="Citation or charge info"
       />
 
       <RHFInput
         control={control}
-        name="lawEnforcement.officerName"
+        name="law.officer_name_badge"
         label={IncidentReportHeaders.officerName}
         placeholder="Enter officer name and badge number"
       />

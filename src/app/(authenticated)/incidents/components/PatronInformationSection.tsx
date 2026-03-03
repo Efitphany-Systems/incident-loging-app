@@ -12,38 +12,38 @@ export default function PatronInformationSection() {
       <div className="text-center text-xl font-bold">{IncidentReportHeaders.PatronInformation}</div>
       <RHFInput
         control={control}
-        name="patronInformation.name"
+        name="patron.name"
         label={IncidentReportHeaders.patronName}
         placeholder="Enter patron name"
       />
 
       <RHFInput
         control={control}
-        name="patronInformation.phone"
+        name="patron.phone"
         label={IncidentReportHeaders.patronPhone}
         placeholder="Enter phone number"
       />
       <RHFInput
         control={control}
-        name="patronInformation.email"
+        name="patron.email"
         label={IncidentReportHeaders.patronEmail}
         placeholder="Enter email address"
       />
       <RHFInput
         control={control}
-        name="patronInformation.contactTime"
+        name="patron.contact_time"
         label={IncidentReportHeaders.patronContactTime}
         placeholder="E.g., Evenings after 5pm"
       />
       <RHFInput
         control={control}
-        name="patronInformation.address_street"
+        name="patron.address_street"
         label={IncidentReportHeaders.patronAddress}
         placeholder="Enter street address"
       />
       <RHFInput
         control={control}
-        name="patronInformation.address_city"
+        name="patron.address_city"
         label={IncidentReportHeaders.patronCityState}
         placeholder="Enter city, state, and zip code"
       />

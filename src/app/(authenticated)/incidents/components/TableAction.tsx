@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Edit, Trash } from "lucide-react";
+import { Edit, Trash, View } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import {
@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { deleteIncidentsAction } from "../action";
 
-export const TableAction = ({ ID }: { ID: string }) => {
+export const TableAction = ({ ID, category }: { ID: string; category: string }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -30,8 +30,22 @@ export const TableAction = ({ ID }: { ID: string }) => {
 
   return (
     <div className="flex items-center">
-      <Button variant="ghost" size="icon" className="cursor-pointer" onClick={() => router.push(`/incidents/${ID}`)}>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="cursor-pointer"
+        onClick={() => router.push(`/incidents/${category}/${ID}`)}
+      >
         <Edit size={18} />
+      </Button>
+
+      <Button
+        variant="ghost"
+        size="icon"
+        className="cursor-pointer"
+        onClick={() => router.push(`/incidents/view/${ID}`)}
+      >
+        <View size={18} />
       </Button>
 
       <AlertDialog>

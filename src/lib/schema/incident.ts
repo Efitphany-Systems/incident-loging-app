@@ -1,19 +1,20 @@
 import { z } from "zod";
 
 const eventAndFillerInformation = z.object({
-  category: z.string(),
-  show: z.string().min(10, "Please select a show."),
-  wearsGlasses: z.enum(["yes", "no"]),
-  inUse: z.enum(["yes", "no"]),
+  category_id: z.string(),
+  event_id: z.string().min(10, "Please select a show."),
+  wears_glasses: z.boolean("please select a value from it"),
+  in_use: z.boolean("please select a value from it"),
   severity: z.enum(["low", "medium", "high"]),
   description: z.string().optional(),
+  location_id: z.string().min(1, "Please select a location."),
 });
 
 const patronInformation = z.object({
   name: z.string("Enter a valid name"),
   phone: z.string("Enter a valid phone number"),
   email: z.email("Enter a valid email address"),
-  contactTime: z.string("Enter preferred contact time"),
+  contact_time: z.string("Enter preferred contact time"),
   address_street: z.string("Enter street address"),
   address_city: z.string("Enter city, state, and zip code"),
 });
@@ -22,48 +23,48 @@ const witnessSchema = z.object({
   name: z.string("Enter a valid name").min(3, "Name should be at least 3 characters"),
   phone: z.string("Enter a valid phone number").min(10, "Phone number should be at least 10 digits"),
   email: z.email("Enter a valid email address"),
-  contactTime: z.string().min(1, "Enter preferred contact time"),
-  employmentType: z.enum(["employee", "non employee"]),
+  contact_time: z.string().min(1, "Enter preferred contact time"),
+  employee: z.boolean("please select a value from it"),
 });
 
 export const medicalSchema = z
   .object({
-    visibleInjuries: z.enum(["yes", "no"]),
-    visibleInjuriesExplain: z.string().optional(),
+    visible_injuries: z.boolean("please select a value from it"),
+    injury_explanation: z.string().optional(),
 
-    medicalAttention: z.enum(["yes", "no"]),
-    offeredMedical: z.enum(["yes", "no"]),
-    accepted: z.enum(["accepted", "refused"]),
+    medical_attention_apparent: z.boolean("please select a value from it"),
+    medical_services_offered: z.boolean("please select a value from it"),
+    medical_services_accepted: z.boolean("please select a value from it"),
 
-    ambulanceRequested: z.enum(["yes", "no"]),
-    ambulanceCompany: z.string().optional(),
-    ambulanceEMT: z.string().optional(),
+    ambulance_requested: z.boolean("please select a value from it"),
+    ambulance_company: z.string().optional(),
+    emt_name_or_number: z.string().optional(),
 
-    didPatientLeaveAmbulance: z.enum(["yes", "no"]),
-    whereTheyGo: z.string().optional(),
+    patron_left_in_ambulance: z.boolean("please select a value from it"),
+    destination: z.string().optional(),
   })
   .superRefine((data, ctx) => {
-    if (data.visibleInjuries === "yes" && !data.visibleInjuriesExplain?.trim()) {
+    if (data.visible_injuries && !data.injury_explanation?.trim()) {
       ctx.addIssue({
         code: "custom",
-        path: ["visibleInjuriesExplain"],
+        path: ["injury_explanation"],
         message: "Please describe the visible injuries.",
       });
     }
 
-    if (data.ambulanceRequested === "yes") {
-      if (!data.ambulanceCompany?.trim()) {
+    if (data.ambulance_requested) {
+      if (!data.ambulance_company?.trim()) {
         ctx.addIssue({
           code: "custom",
-          path: ["ambulanceCompany"],
+          path: ["ambulance_company"],
           message: "Ambulance company is required when ambulance is requested.",
         });
       }
 
-      if (!data.ambulanceEMT?.trim()) {
+      if (!data.emt_name_or_number?.trim()) {
         ctx.addIssue({
           code: "custom",
-          path: ["ambulanceEMT"],
+          path: ["emt_name_or_number"],
           message: "EMT information is required when ambulance is requested.",
         });
       }
@@ -71,20 +72,20 @@ export const medicalSchema = z
   });
 
 const lawEnforcementSchema = z.object({
-  contacted: z.enum(["yes", "no"]),
-  explanation: z.string().optional(),
-  reportWritten: z.enum(["yes", "no"]),
-  reportNumber: z.string().optional(),
-  citation: z.string("Enter citation or charge info").optional(),
-  officerName: z.string().optional(),
+  law_enforcement_contacted: z.boolean("please select a value from it"),
+  contact_explanation: z.string().optional(),
+  police_report_written: z.boolean("please select a value from it"),
+  police_report_number: z.string().optional(),
+  citation_or_charge_or_arrest: z.string("Enter citation or charge info").optional(),
+  officer_name_badge: z.string().optional(),
 });
 
 export const incidentSchema = z.object({
   eventAndFillerInformation: eventAndFillerInformation,
-  patronInformation: patronInformation,
+  patron: patronInformation,
   witnesses: z.array(witnessSchema),
-  medical: medicalSchema.optional(),
-  lawEnforcement: lawEnforcementSchema.optional(),
+  medical: medicalSchema.nullable(),
+  law: lawEnforcementSchema.nullable(),
 });
 
 export type IncidentFormValues = z.infer<typeof incidentSchema>;

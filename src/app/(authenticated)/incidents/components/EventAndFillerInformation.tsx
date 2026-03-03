@@ -7,9 +7,10 @@ import { Card } from "@/components/ui/card";
 import { SeverityOptions, YesNoOptions } from "@/constants/app";
 import { IncidentReportHeaders } from "@/constants/incidents";
 import { Events } from "@/types/events";
+import { Locations } from "@/types/locations";
 import { useFormContext } from "react-hook-form";
 
-export default function EventAndFillerInformation({ events }: { events: Events }) {
+export default function EventAndFillerInformation({ events, locations }: { events: Events; locations: Locations }) {
   const { control } = useFormContext();
   return (
     <Card className="bg-card text-card-foreground h-full space-y-1 p-4">
@@ -18,7 +19,7 @@ export default function EventAndFillerInformation({ events }: { events: Events }
       <div>
         <RHFSelect
           control={control}
-          name="eventAndFillerInformation.show"
+          name="eventAndFillerInformation.event_id"
           label={IncidentReportHeaders.show}
           placeholder="Select show"
           options={events.map((event) => ({
@@ -30,14 +31,14 @@ export default function EventAndFillerInformation({ events }: { events: Events }
 
       <RHFRadio
         control={control}
-        name="eventAndFillerInformation.wearsGlasses"
+        name="eventAndFillerInformation.wears_glasses"
         label={IncidentReportHeaders.wearsGlasses}
         options={YesNoOptions}
       />
 
       <RHFRadio
         control={control}
-        name="eventAndFillerInformation.inUse"
+        name="eventAndFillerInformation.in_use"
         label={IncidentReportHeaders.inUse}
         options={YesNoOptions}
       />
@@ -48,6 +49,19 @@ export default function EventAndFillerInformation({ events }: { events: Events }
         label={IncidentReportHeaders.severity}
         options={SeverityOptions}
       />
+
+      <div>
+        <RHFSelect
+          control={control}
+          name="eventAndFillerInformation.location_id"
+          label={IncidentReportHeaders.location}
+          placeholder="Select location"
+          options={locations.map((location) => ({
+            label: location.name,
+            value: location.id,
+          }))}
+        />
+      </div>
 
       <RHFInput
         name="eventAndFillerInformation.description"

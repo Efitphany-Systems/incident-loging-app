@@ -13,8 +13,8 @@ create table if not exists public.reporter (
   name text,
   email text,
   phone text,
-  wears_glasses: boolean default false,
-  in_use: boolean default false,
+  wears_glasses boolean default false,
+  in_use boolean default false,
 
 
   created_at timestamptz default now(),

@@ -1,9 +1,8 @@
 import { LawEnforcement, Medical } from "@/lib/schema/incident";
 
-export const witnessTypes = ["employee", "non employee"];
-
 export const IncidentReportHeaders = {
   NewIncidentReport: "New Incident Report",
+  location: "location",
   EventAndFillerInformation: "Event & Person Filling out Form Information",
   show: "Show/Event",
   wearsGlasses: "Do you wear GLASSES or LENSES?",
@@ -45,23 +44,23 @@ export const IncidentReportHeaders = {
 };
 
 export const defaultMedical: Medical = {
-  visibleInjuries: "yes",
-  visibleInjuriesExplain: "",
-  medicalAttention: "yes",
-  offeredMedical: "yes",
-  accepted: "accepted",
-  ambulanceRequested: "no",
-  ambulanceCompany: "",
-  ambulanceEMT: "",
-  didPatientLeaveAmbulance: "yes",
-  whereTheyGo: "",
+  visible_injuries: true,
+  injury_explanation: "",
+  medical_attention_apparent: true,
+  medical_services_offered: true,
+  medical_services_accepted: true,
+  ambulance_requested: true,
+  ambulance_company: "",
+  emt_name_or_number: "",
+  patron_left_in_ambulance: true,
+  destination: "",
 };
 
 export const defaultLaw: LawEnforcement = {
-  contacted: "yes",
-  explanation: "",
-  reportWritten: "no",
-  reportNumber: "",
-  citation: "",
-  officerName: "",
+  law_enforcement_contacted: true,
+  contact_explanation: "",
+  police_report_written: true,
+  police_report_number: "",
+  citation_or_charge_or_arrest: "",
+  officer_name_badge: "",
 };

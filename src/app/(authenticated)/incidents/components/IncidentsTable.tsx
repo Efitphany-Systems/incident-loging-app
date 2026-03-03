@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Card } from "@/components/ui/card";
 import { TableAction } from "./TableAction";
 import { Incidents } from "@/types/incidents";
+import { FORMAT_TIME } from "@/utils/datetime";
 
 function getSeverityColor(severity?: string | null) {
   switch (severity?.toLowerCase()) {
@@ -27,7 +28,7 @@ export default function IncidentsTable({ incidents }: { incidents: Incidents }) 
           <TableHeader>
             <TableRow>
               <TableHead>Time</TableHead>
-              <TableHead>Type</TableHead>
+              <TableHead>Category</TableHead>
               <TableHead>Location</TableHead>
               <TableHead>Severity</TableHead>
               <TableHead className="text-right">Actions</TableHead>
@@ -45,12 +46,20 @@ export default function IncidentsTable({ incidents }: { incidents: Incidents }) 
 
             {incidents.map((incident) => (
               <TableRow key={incident.id}>
-                <TableCell className="font-medium">{incident.time || "—"}</TableCell>
-                <TableCell>{incident.type || "—"}</TableCell>
+                <TableCell className="font-medium">
+                  {FORMAT_TIME(incident.created_at) || <TableCell>{incident.severity || "—"}</TableCell>}
+                </TableCell>
+                <TableCell>{incident.category || <TableCell>{incident.severity || "—"}</TableCell>}</TableCell>
                 <TableCell className="capitalize">{incident.location}</TableCell>
-                <TableCell>{incident.severity || "—"}</TableCell>
+                <TableCell>
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${getSeverityColor(incident.severity)}`}
+                  >
+                    {incident.severity || "—"}
+                  </span>
+                </TableCell>
                 <TableCell className="flex justify-end">
-                  <TableAction ID={incident.id} />
+                  <TableAction ID={incident.id} category={incident.category} />
                 </TableCell>
               </TableRow>
             ))}
@@ -69,8 +78,8 @@ export default function IncidentsTable({ incidents }: { incidents: Incidents }) 
           >
             <div className="flex-1">
               <div className="mb-1 flex items-center gap-3">
-                <span className="font-semibold">{incident.type || "—"}</span>
-                <span className="text-muted-foreground text-xs">{incident.time || "—"}</span>
+                <span className="font-semibold">{FORMAT_TIME(incident.created_at) || "—"}</span>
+                <span className="text-muted-foreground text-xs">{incident.category || "—"}</span>
               </div>
 
               <p className="text-muted-foreground text-sm capitalize">{incident.location || "—"}</p>
@@ -81,7 +90,7 @@ export default function IncidentsTable({ incidents }: { incidents: Incidents }) 
                 {incident.severity || "—"}
               </span>
 
-              <TableAction ID={incident.id} />
+              <TableAction ID={incident.id} category={incident.category} />
             </div>
           </div>
         ))}

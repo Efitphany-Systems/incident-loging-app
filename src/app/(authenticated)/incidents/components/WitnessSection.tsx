@@ -5,8 +5,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { RHFInput } from "@/components/form/RHFInput";
-import { RHFSelect } from "@/components/form/RHFSelect";
-import { IncidentReportHeaders, witnessTypes } from "@/constants/incidents";
+import { IncidentReportHeaders } from "@/constants/incidents";
+import { WitnessEmplymentTypesOptions } from "@/constants/app";
+import { RHFRadio } from "@/components/form/RHFRadio";
 
 export default function WitnessSection() {
   const { control } = useFormContext();
@@ -32,15 +33,11 @@ export default function WitnessSection() {
             </Button>
           </div>
 
-          <RHFSelect
+          <RHFRadio
             control={control}
-            name={`witnesses.${index}.employmentType`}
+            name={`witnesses.${index}.employee`}
             label={IncidentReportHeaders.employmentType}
-            placeholder="Select employment type"
-            options={witnessTypes.map((t) => ({
-              label: t.toUpperCase(),
-              value: t,
-            }))}
+            options={WitnessEmplymentTypesOptions}
           />
 
           <RHFInput
@@ -66,7 +63,7 @@ export default function WitnessSection() {
 
           <RHFInput
             control={control}
-            name={`witnesses.${index}.contactTime`}
+            name={`witnesses.${index}.contact_time`}
             label={IncidentReportHeaders.witnessContactTime}
             placeholder="E.g., Mornings before 10am"
           />
@@ -82,11 +79,11 @@ export default function WitnessSection() {
           variant="primary"
           onClick={() =>
             append({
-              employmentType: "",
+              employee: true,
               name: "",
               phone: "",
               email: "",
-              contactTime: "",
+              contact_time: "",
             })
           }
         >

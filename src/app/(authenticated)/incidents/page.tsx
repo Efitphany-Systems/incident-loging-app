@@ -4,6 +4,8 @@ import IncidentsTable from "./components/IncidentsTable";
 
 export default async function IncidentsPage() {
   const allIncidents = await getIncidentsAction();
+  console.log(allIncidents);
+
   return (
     <div className="mx-auto">
       <IncidentsPageHeader />

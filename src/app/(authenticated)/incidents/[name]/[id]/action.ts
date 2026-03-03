@@ -4,14 +4,17 @@ import { supabaseServer } from "@/lib/supabase/server-client";
 import { getCurrentProfile } from "@/lib/auth";
 import { IncidentPayload } from "@/lib/schema/incident";
 
-export async function createIncidentAction(payload: IncidentPayload) {
+export async function updateIncidnetAction(payload: IncidentPayload, ID: string) {
+  console.log(ID);
+  console.log(payload);
+
   const supabase = await supabaseServer();
   const user = await getCurrentProfile();
 
-  const { medical, law, ...rest } = payload;
-
   if (user && user.role == "admin") {
-    const { error } = await supabase.rpc("create_new_incident_fun", {
+    const { medical, law, ...rest } = payload;
+    const { error } = await supabase.rpc("update_incident_function", {
+      p_incident_id: ID,
       payload: {
         ...rest,
         user_id: user.id,
