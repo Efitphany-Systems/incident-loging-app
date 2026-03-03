@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Card } from "@/components/ui/card";
 import { TableAction } from "./TableAction";
 import { Incidents } from "@/types/incidents";
-import { FORMAT_TIME } from "@/utils/datetime";
+import { FORMAT_DATE_TIME } from "@/utils/datetime";
 
 function getSeverityColor(severity?: string | null) {
   switch (severity?.toLowerCase()) {
@@ -47,7 +47,7 @@ export default function IncidentsTable({ incidents }: { incidents: Incidents }) 
             {incidents.map((incident) => (
               <TableRow key={incident.id}>
                 <TableCell className="font-medium">
-                  {FORMAT_TIME(incident.created_at) || <TableCell>{incident.severity || "—"}</TableCell>}
+                  {FORMAT_DATE_TIME(incident.created_at) || <TableCell>{incident.severity || "—"}</TableCell>}
                 </TableCell>
                 <TableCell>{incident.category || <TableCell>{incident.severity || "—"}</TableCell>}</TableCell>
                 <TableCell className="capitalize">{incident.location}</TableCell>
@@ -78,7 +78,7 @@ export default function IncidentsTable({ incidents }: { incidents: Incidents }) 
           >
             <div className="flex-1">
               <div className="mb-1 flex items-center gap-3">
-                <span className="font-semibold">{FORMAT_TIME(incident.created_at) || "—"}</span>
+                <span className="font-semibold">{FORMAT_DATE_TIME(incident.created_at) || "—"}</span>
                 <span className="text-muted-foreground text-xs">{incident.category || "—"}</span>
               </div>
 

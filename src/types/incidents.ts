@@ -88,3 +88,9 @@ export interface IncidentReport {
   law: LawInformation | null;
   medical: MedicalInformation | null;
 }
+
+export interface IncidentFilters {
+  date?: string;
+  category?: string;
+  severity?: string;
+}

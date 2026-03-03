@@ -1,7 +1,9 @@
 import { format } from "date-fns";
+type Input = string | Date | null;
+
 // CONSIDERING DIFFERENT TIME ZONE COMMON FUNCTION WILL BE MORE USEFUL
-export const FORMAT_TIME = (input: string | Date) => {
-  if (!input) return "";
+export const FORMAT_TIME = (input?: Input): string => {
+  if (!input) return "--:--";
 
   // If already Date
   if (input instanceof Date) {
@@ -25,7 +27,7 @@ export const FORMAT_TIME = (input: string | Date) => {
   return format(date, "hh:mm a");
 };
 
-export const FORMAT_DATE = (input?: string | Date | null): string => {
+export const FORMAT_DATE = (input?: Input): string => {
   if (!input) return "--:--";
 
   let date: Date;
@@ -46,4 +48,8 @@ export const FORMAT_DATE = (input?: string | Date | null): string => {
   if (isNaN(date.getTime())) return "";
 
   return format(date, "dd MMMM yyyy");
+};
+
+export const FORMAT_DATE_TIME = (input?: string | Date | null): string => {
+  return `${FORMAT_TIME(input)}, ${FORMAT_DATE(input)} `;
 };

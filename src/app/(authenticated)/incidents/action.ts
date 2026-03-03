@@ -1,15 +1,40 @@
 "use server";
 
 import { supabaseServer } from "@/lib/supabase/server-client";
-import { IncidentReport } from "@/types/incidents";
+import { IncidentFilters, IncidentReport } from "@/types/incidents";
 import { revalidatePath } from "next/cache";
 
-export async function getIncidentsAction() {
+export async function getIncidentsAction(filters?: IncidentFilters) {
   const supabase = await supabaseServer();
-  const { data, error } = await supabase.from("get_incidents_view").select(`*`);
 
-  if (error) throw new Error(error.message);
-  return data;
+  let query = supabase.from("get_incidents_view").select("*");
+
+  console.log(query);
+
+  if (filters?.date) {
+    const startOfDay = new Date(filters.date);
+    const endOfDay = new Date(filters.date);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    query = query.gte("created_at", startOfDay.toISOString()).lte("created_at", endOfDay.toISOString());
+  }
+  if (filters?.category) {
+    query = query.eq("category", filters.category);
+  }
+
+  if (filters?.severity) {
+    query = query.eq("severity", filters.severity);
+  }
+
+  const { data, error } = await query.order("created_at", {
+    ascending: false,
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data ?? [];
 }
 
 export async function deleteIncidentsAction(id: string) {
