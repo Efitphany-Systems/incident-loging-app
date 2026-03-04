@@ -1,7 +1,7 @@
 "use server";
 
 import { supabaseServer } from "@/lib/supabase/server-client";
-import { IncidentFilters, IncidentReport } from "@/types/incidents";
+import { IncidentFilters, IncidentImages, IncidentReport } from "@/types/incidents";
 import { revalidatePath } from "next/cache";
 
 export async function getIncidentsAction(filters?: IncidentFilters) {
@@ -93,6 +93,7 @@ export async function getIncidentByIDAction(ID: string) {
     severity: data.severity,
     description: data.description,
     created_at: data?.created_at,
+    images: data?.images,
     category: data?.incident_categories?.name,
     category_id: data?.incident_categories?.id,
     location: data?.locations?.name,
@@ -140,4 +141,32 @@ export async function getIncidentCategoriesAction() {
   if (error) throw new Error(error.message);
 
   return data;
+}
+
+export async function shiftImageFromTemp(images: IncidentImages) {
+  const supabase = await supabaseServer();
+  const movedImages = [];
+
+  const { data, error } = await supabase.storage.from("incidents-images").list("temp");
+  console.log("Error in temp geting ", error);
+  console.log("Files in temp ", data);
+
+  for (const image of images) {
+    const fileName = image.path.split("/").pop();
+
+    const newPath = `incidents/${fileName}`;
+
+    console.log("New path ", newPath, " image.path ", image.path);
+
+    const { error } = await supabase.storage.from("incidents-images").move(image.path, newPath);
+    console.log("error ", error);
+    const { data } = supabase.storage.from("incidents-images").getPublicUrl(newPath);
+
+    movedImages.push({
+      path: newPath,
+      url: data.publicUrl,
+    });
+  }
+
+  return movedImages;
 }

@@ -16,6 +16,7 @@ export function useCreateIncidentForm(category_id: string) {
         in_use: true,
         severity: "low",
         description: "",
+        images: [],
       },
       witnesses: [],
       medical: null,
@@ -25,6 +26,8 @@ export function useCreateIncidentForm(category_id: string) {
 
   const form = IncedentReportingForm.handleSubmit(async (data: IncidentFormValues) => {
     try {
+      console.log(data);
+
       const response = await createIncidentAction(data);
       if (response.success) {
         IncedentReportingForm.reset();

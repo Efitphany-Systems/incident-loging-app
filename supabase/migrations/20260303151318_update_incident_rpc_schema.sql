@@ -9,6 +9,7 @@ set search_path = public
 as $$
 begin
 
+
   -- 1️⃣ Update incident
   update incidents
   set
@@ -17,6 +18,7 @@ begin
     severity = (payload->'eventAndFillerInformation'->>'severity')::incident_severity,
     description = payload->'eventAndFillerInformation'->>'description',
     location_id = (payload->'eventAndFillerInformation'->>'location_id')::uuid,
+    images = coalesce(payload->'eventAndFillerInformation'->'images', '[]'::jsonb),
     updated_at = now()
   where id = p_incident_id;
 

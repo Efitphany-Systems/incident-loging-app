@@ -13,7 +13,8 @@ begin
     severity,
     description,
     location_id,
-    created_by
+    created_by,
+    images
   )
   values (
     (payload->'eventAndFillerInformation'->>'category_id')::uuid,
@@ -21,7 +22,8 @@ begin
     (payload->'eventAndFillerInformation'->>'severity')::incident_severity,
     payload->'eventAndFillerInformation'->>'description',
     (payload->'eventAndFillerInformation'->>'location_id')::uuid,
-    (payload->>'user_id')::uuid
+    (payload->>'user_id')::uuid,
+    coalesce(payload->'eventAndFillerInformation'->'images', '[]'::jsonb)
   )
   returning id into new_incident_id;
 
