@@ -2,6 +2,7 @@
 
 import { supabaseServer } from "@/lib/supabase/server-client";
 import { IncidentFilters, IncidentImages, IncidentReport } from "@/types/incidents";
+import { GET_UTC_DAY_RANGE } from "@/utils/datetime";
 import { revalidatePath } from "next/cache";
 
 export async function getIncidentsAction(filters?: IncidentFilters) {
@@ -12,11 +13,8 @@ export async function getIncidentsAction(filters?: IncidentFilters) {
   console.log(query);
 
   if (filters?.date) {
-    const startOfDay = new Date(filters.date);
-    const endOfDay = new Date(filters.date);
-    endOfDay.setHours(23, 59, 59, 999);
-
-    query = query.gte("created_at", startOfDay.toISOString()).lte("created_at", endOfDay.toISOString());
+    const [start, end] = GET_UTC_DAY_RANGE(filters.date);
+    query = query.gte("created_at", start.toISOString()).lte("created_at", end.toISOString());
   }
   if (filters?.category) {
     query = query.eq("category", filters.category);
