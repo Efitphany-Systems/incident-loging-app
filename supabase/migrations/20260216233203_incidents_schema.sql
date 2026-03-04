@@ -34,6 +34,7 @@ create table if not exists public.incidents (
     severity public.incident_severity not null default 'low',
     
     description text,
+    images jsonb not null default '[]'::jsonb
 
     status text not null default 'open',
 
