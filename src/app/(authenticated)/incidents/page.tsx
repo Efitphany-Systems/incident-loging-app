@@ -8,13 +8,15 @@ import { getCurrentProfile } from "@/lib/auth";
 export default async function IncidentsPage({ searchParams }: { searchParams: Promise<IncidentFilters> }) {
   const filters = await searchParams;
   const user = await getCurrentProfile();
-  console.log("user :::: ", user);
 
   const allIncidents = await getIncidentsAction(filters);
   const IncidentCategories = await getIncidentCategoriesAction();
   return (
     <div className="mx-auto">
-      <IncidentsPageHeader />
+      <IncidentsPageHeader
+        enabled={Boolean(allIncidents?.length)}
+        params={new URLSearchParams(filters as any).toString()}
+      />
       <IncidentsFilters categories={IncidentCategories} />
       <IncidentsTable incidents={allIncidents} role={user?.role ?? "staff"} />
     </div>
