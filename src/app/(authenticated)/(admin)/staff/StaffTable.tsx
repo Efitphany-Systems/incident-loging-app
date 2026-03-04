@@ -66,28 +66,33 @@ export default function StaffTable({ staff }: { staff: Staff[] }) {
       <div className="space-y-3 md:hidden">
         {staff.length === 0 && <div className="text-muted-foreground py-8 text-center">No staff found</div>}
 
-        {staff.map((staff) => (
+        {staff.map((member) => (
           <div
-            key={staff.id}
-            className="border-border bg-muted/30 hover:bg-muted/50 flex items-center justify-between rounded-lg border p-4 transition hover:shadow-md"
+            key={member.id}
+            className="bg-card border-border rounded-xl border p-4 shadow-sm transition hover:shadow-md"
           >
-            {/* Left */}
-            <div className="min-w-0 flex-1">
-              <div className="mb-1 flex items-center gap-3">
-                <span className="truncate font-semibold">{staff.name || "—"}</span>
+            {/* Top Row: Name + Role */}
+            <div className="flex items-start justify-between gap-3">
+              <h3 className="truncate text-base font-semibold">{member.name || "—"}</h3>
 
-                <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${getRoleColor(staff.role)}`}>
-                  {staff.role}
-                </span>
-              </div>
-
-              <p className="text-muted-foreground truncate text-sm">{staff.email || "—"}</p>
-
-              <p className="text-muted-foreground text-xs">{staff.phone || "—"}</p>
+              <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${getRoleColor(member.role)}`}>
+                {member.role}
+              </span>
             </div>
 
+            {/* Email */}
+            <p className="text-muted-foreground mt-1 truncate text-sm">{member.email || "—"}</p>
+
+            {/* Phone */}
+            <p className="text-muted-foreground mt-1 text-xs">{member.phone || "—"}</p>
+
+            {/* Divider */}
+            <hr className="mt-3" />
+
             {/* Actions */}
-            <TableAction staffID={staff.id} />
+            <div className="flex justify-end">
+              <TableAction staffID={member.id} />
+            </div>
           </div>
         ))}
       </div>

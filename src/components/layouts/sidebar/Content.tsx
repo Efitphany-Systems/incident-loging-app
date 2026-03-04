@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth } from "@/components/AuthProvider";
 import {
   SidebarContent,
   SidebarGroup,
@@ -14,10 +13,10 @@ import { menu } from "@/utils/menu.selector";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Content = () => {
+const Content = ({ role }: { role: string }) => {
   const pathname = usePathname();
-  const user = useAuth();
-  const menuItems = user?.role ? menu(user.role) : [];
+
+  const menuItems = role ? menu(role) : [];
   const { setOpenMobile } = useSidebar();
   return (
     <SidebarContent>
