@@ -54,19 +54,28 @@ export default function VenuesTable({ venues }: { venues: Venues }) {
         {venues.map((venue) => (
           <div
             key={venue.id}
-            className="border-border bg-muted/30 hover:bg-muted/50 flex items-center justify-between rounded-lg border p-4 transition hover:shadow-md"
+            className="bg-card border-border rounded-xl border p-4 shadow-sm transition hover:shadow-md"
           >
-            {/* Left */}
-            <div className="min-w-0 flex-1">
-              <div className="mb-1 truncate font-semibold">{venue.name}</div>
-              <div className="text-muted-foreground text-sm">{venue.address}</div>
-              <div className="text-muted-foreground text-sm">{venue.additional_information}</div>
-            </div>
+            {/* Venue Name */}
+            <h3 className="truncate text-base font-semibold">{venue.name || "—"}</h3>
+
+            {/* Address */}
+            <p className="text-muted-foreground mt-1 truncate text-sm">{venue.address || "—"}</p>
+
+            {/* Additional Info */}
+            {venue.additional_information && (
+              <p className="text-muted-foreground mt-1 line-clamp-2 text-xs">{venue.additional_information}</p>
+            )}
+
+            {/* Divider */}
+            <div className="border-border my-3 border-t" />
 
             {/* Actions */}
-            <Button variant="ghost" size="icon" className="ml-2 rounded-full">
-              <MoreVertical size={18} />
-            </Button>
+            <div className="flex justify-end">
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <MoreVertical size={18} />
+              </Button>
+            </div>
           </div>
         ))}
       </div>

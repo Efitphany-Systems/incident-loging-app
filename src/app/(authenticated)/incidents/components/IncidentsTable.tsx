@@ -9,19 +9,19 @@ import { FORMAT_DATE_TIME } from "@/utils/datetime";
 function getSeverityColor(severity?: string | null) {
   switch (severity?.toLowerCase()) {
     case "high":
-      return "bg-red-500/15 text-red-400";
+      return "bg-red-500/50 text-card-forground";
     case "medium":
-      return "bg-yellow-500/15 text-yellow-400";
+      return "bg-yellow-500/50 text-card-forground";
     case "low":
-      return "bg-green-500/15 text-green-400";
+      return "bg-green-500/50 text-card-forground";
     default:
       return "bg-muted text-muted-foreground";
   }
 }
 
-export default function IncidentsTable({ incidents }: { incidents: Incidents }) {
+export default function IncidentsTable({ incidents, role }: { incidents: Incidents; role: string }) {
   return (
-    <Card className="md:bg-card text-card-foreground h-full space-y-1 border-0 bg-transparent p-4">
+    <Card className="md:bg-card text-card-foreground h-full space-y-1 border-0 bg-transparent p-2 md:p-4">
       {/* ===== Desktop Table ===== */}
       <div className="hidden overflow-x-auto md:block">
         <Table>
@@ -59,7 +59,7 @@ export default function IncidentsTable({ incidents }: { incidents: Incidents }) 
                   </span>
                 </TableCell>
                 <TableCell className="flex justify-end">
-                  <TableAction ID={incident.id} category={incident.category} />
+                  <TableAction ID={incident.id} category={incident.category} role={role} />
                 </TableCell>
               </TableRow>
             ))}
@@ -74,23 +74,35 @@ export default function IncidentsTable({ incidents }: { incidents: Incidents }) 
         {incidents.map((incident) => (
           <div
             key={incident.id}
-            className="border-border bg-muted/30 hover:bg-muted/50 flex items-center justify-between rounded-lg border p-4 transition hover:shadow-md"
+            className="bg-card border-border rounded-xl border p-4 shadow-sm transition hover:shadow-md"
           >
-            <div className="flex-1">
-              <div className="mb-1 flex items-center gap-3">
-                <span className="font-semibold">{FORMAT_DATE_TIME(incident.created_at) || "—"}</span>
-                <span className="text-muted-foreground text-xs">{incident.category || "—"}</span>
+            {/* Top Row */}
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0 flex-1">
+                <h3 className="truncate text-base font-semibold">{incident.category || "—"}</h3>
               </div>
 
-              <p className="text-muted-foreground text-sm capitalize">{incident.location || "—"}</p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className={`rounded-full px-3 py-1 text-xs font-semibold ${getSeverityColor(incident.severity)}`}>
+              <span
+                className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${getSeverityColor(
+                  incident.severity
+                )}`}
+              >
                 {incident.severity || "—"}
               </span>
+            </div>
 
-              <TableAction ID={incident.id} category={incident.category} />
+            {/* Location */}
+            <p className="text-muted-foreground mt-1 text-sm capitalize">{incident.location || "—"}</p>
+
+            {/* Date */}
+            <p className="text-muted-foreground mt-1 text-xs">{FORMAT_DATE_TIME(incident.created_at) || "—"}</p>
+
+            {/* Divider */}
+            <hr className="mt-3" />
+
+            {/* Actions */}
+            <div className="flex justify-end">
+              <TableAction ID={incident.id} category={incident.category} role={role} />
             </div>
           </div>
         ))}

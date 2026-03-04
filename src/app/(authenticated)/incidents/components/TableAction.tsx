@@ -16,9 +16,8 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import { deleteIncidentsAction } from "../action";
-import { useAuth } from "@/components/AuthProvider";
 
-export const TableAction = ({ ID, category }: { ID: string; category: string }) => {
+export const TableAction = ({ ID, category, role }: { ID: string; category: string; role: string }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -28,11 +27,9 @@ export const TableAction = ({ ID, category }: { ID: string; category: string }) 
       router.refresh();
     });
   }
-  const user = useAuth();
-
   return (
-    <div className="flex items-center">
-      {user.role == "admin" && (
+    <div className="flex items-start">
+      {role == "admin" && (
         <Button
           variant="ghost"
           size="icon"
@@ -50,7 +47,7 @@ export const TableAction = ({ ID, category }: { ID: string; category: string }) 
       >
         <View size={18} />
       </Button>
-      {user.role == "admin" && (
+      {role == "admin" && (
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button variant="ghost" size="icon" className="cursor-pointer" disabled={isPending}>

@@ -67,19 +67,26 @@ export default function EventsTable({ events }: { events: Events }) {
         {events.map((event) => (
           <div
             key={event.id}
-            className="border-border bg-muted/30 hover:bg-muted/50 flex items-center justify-between rounded-lg border p-4 transition hover:shadow-md"
+            className="bg-card border-border rounded-xl border p-4 shadow-sm transition hover:shadow-md"
           >
-            {/* Left */}
-            <div className="min-w-0 flex-1">
-              <div className="mb-1 truncate font-semibold">{event.name}</div>
+            {/* Event Name */}
+            <h3 className="truncate text-base font-semibold">{event.name || "—"}</h3>
 
-              <div className="text-muted-foreground text-sm">{formatDate(event.event_date)}</div>
+            {/* Date */}
+            <p className="text-muted-foreground mt-1 text-sm">{formatDate(event.event_date) || "—"}</p>
 
-              <div className="text-muted-foreground text-xs">{formatTimeRange(event.start_time, event.end_time)}</div>
-            </div>
+            {/* Time Range */}
+            <p className="text-muted-foreground mt-1 text-xs">
+              {formatTimeRange(event.start_time, event.end_time) || "—"}
+            </p>
+
+            {/* Divider */}
+            <hr className="mt-3" />
 
             {/* Actions */}
-            <TableAction eventID={event.id} />
+            <div className="flex justify-end">
+              <TableAction eventID={event.id} />
+            </div>
           </div>
         ))}
       </div>
