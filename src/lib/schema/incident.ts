@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+const imageSchema = z.object({
+  url: z.string().url(),
+  path: z.string(),
+});
+
 const eventAndFillerInformation = z.object({
   category_id: z.string(),
   event_id: z.string().min(10, "Please select a show."),
@@ -8,6 +13,7 @@ const eventAndFillerInformation = z.object({
   severity: z.enum(["low", "medium", "high"]),
   description: z.string().optional(),
   location_id: z.string().min(1, "Please select a location."),
+  images: z.array(imageSchema).max(5, "Maximum 5 images allowed").optional(),
 });
 
 const patronInformation = z.object({

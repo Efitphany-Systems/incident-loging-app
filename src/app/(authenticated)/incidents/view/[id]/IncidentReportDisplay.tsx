@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { IncidentReport } from "@/types/incidents";
 import { FORMAT_DATE, FORMAT_TIME } from "@/utils/datetime";
 import { YES_NO } from "@/utils/display-utils";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 export default function IncidentReportDisplay({ data }: { data: IncidentReport }) {
   const Field = ({ label, value }: { label: string; value?: string | number }) => (
@@ -34,6 +35,34 @@ export default function IncidentReportDisplay({ data }: { data: IncidentReport }
         <Field label="Time" value={FORMAT_TIME(data?.start_time)} />
         <Field label="Statement" value={data?.description} />
       </Section>
+
+      {/* Images */}
+      {data.images?.length > 0 && (
+        <Section title="IMAGES">
+          <div className="grid grid-cols-5 gap-2 md:gap-5">
+            {data.images.map((img, i) => (
+              <Dialog key={i}>
+                <DialogTrigger asChild>
+                  <img
+                    src={img.url}
+                    alt={`incident-${i}`}
+                    className="border-foreground aspect-square h-full w-full rounded-xl border-2 object-cover md:rounded-4xl"
+                  />
+                </DialogTrigger>
+
+                <DialogContent className="max-w-4xl p-2">
+                  <DialogTitle>Incident Image</DialogTitle>
+                  <img
+                    src={img.url}
+                    alt={`incident-full-${i}`}
+                    className="max-h-[80vh] w-full rounded-md object-contain"
+                  />
+                </DialogContent>
+              </Dialog>
+            ))}
+          </div>
+        </Section>
+      )}
 
       {/* Reporter */}
       <Section title="PERSON FILLING OUT REPORT">

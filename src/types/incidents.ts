@@ -63,11 +63,19 @@ export interface MedicalInformation {
   destination: string;
 }
 
+export interface IncidentImage {
+  url: string;
+  path: string;
+}
+
+export type IncidentImages = IncidentImage[];
+
 export interface IncidentReport {
   id: string;
   severity: "low" | "medium" | "high";
   description: string;
   created_at: string;
+  images: IncidentImage[];
   category: string;
   category_id: string;
   location: string;

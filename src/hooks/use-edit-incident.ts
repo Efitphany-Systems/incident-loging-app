@@ -18,6 +18,7 @@ export function useEditIncidentForm(incident: IncidentReport) {
         severity: incident.severity,
         description: incident.description,
         location_id: incident.location_id,
+        images: incident.images,
       },
       patron: incident.patron,
       witnesses: incident.witnesses,
