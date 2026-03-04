@@ -16,7 +16,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
   if (user) {
     const { data } = await supabase.from("profiles").select("id, email, name, role").eq("id", user.id).single();
     profile = data;
-    console.log(profile);
+    console.log("Profile data", profile);
   }
 
   return (

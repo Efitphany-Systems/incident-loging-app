@@ -12,7 +12,6 @@ export default function IncidentsFilters({ categories }: { categories: IncidentC
   const [isPending, startTransition] = useTransition();
   console.log(isPending);
 
-  // ✅ Read current values from URL
   const currentDate = searchParams.get("date") ?? "";
   const currentCategory = searchParams.get("category") ?? "all";
   const currentSeverity = searchParams.get("severity") ?? "all";
@@ -39,13 +38,18 @@ export default function IncidentsFilters({ categories }: { categories: IncidentC
   }
 
   return (
-    <div className="flex flex-wrap gap-3 p-4">
+    <div className="flex flex-wrap justify-center gap-3 p-4">
       {/* Date */}
-      <Input type="date" className="w-50" value={currentDate} onChange={(e) => updateFilter("date", e.target.value)} />
+      <Input
+        type="date"
+        className="md:w-50"
+        value={currentDate}
+        onChange={(e) => updateFilter("date", e.target.value)}
+      />
 
       {/* Category */}
       <Select value={currentCategory} onValueChange={(value) => updateFilter("category", value)}>
-        <SelectTrigger className="w-50">
+        <SelectTrigger className="w-[40vw] md:w-50">
           <SelectValue placeholder="Select category" />
         </SelectTrigger>
 
@@ -64,7 +68,7 @@ export default function IncidentsFilters({ categories }: { categories: IncidentC
 
       {/* Severity */}
       <Select value={currentSeverity} onValueChange={(value) => updateFilter("severity", value)}>
-        <SelectTrigger className="w-50">
+        <SelectTrigger className="w-[40vw] md:w-50">
           <SelectValue placeholder="Select severity" />
         </SelectTrigger>
 

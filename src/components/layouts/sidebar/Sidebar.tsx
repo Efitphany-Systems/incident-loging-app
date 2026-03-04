@@ -7,7 +7,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <Header />
-      <Content />
+      <Content role="admin" />
       <Footer />
     </Sidebar>
   );

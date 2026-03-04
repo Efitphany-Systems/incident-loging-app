@@ -16,7 +16,6 @@ export default function EditStaffForm({ staff }: { staff: Staff }) {
 
   return (
     <Card className="md:bg-card text-card-foreground h-full space-y-1 border-0 bg-transparent p-4">
-      {JSON.stringify(staff)}
       <form onSubmit={updateStaff} className="space-y-5">
         <RHFInput control={control} name="name" label="Full Name" placeholder="Enter staff name" />
 
@@ -46,7 +45,7 @@ export default function EditStaffForm({ staff }: { staff: Staff }) {
 
         <div className="flex justify-end">
           <Button type="submit" variant="primary" size="xl" className="w-full lg:w-64" disabled={isSubmitting}>
-            {isSubmitting ? <Loader className="animate-spin" /> : "Create Staff"}
+            {isSubmitting ? <Loader className="animate-spin" /> : "Update Staff"}
           </Button>
         </div>
       </form>
