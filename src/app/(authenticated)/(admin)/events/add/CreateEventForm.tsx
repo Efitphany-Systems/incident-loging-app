@@ -10,6 +10,7 @@ import { useCreateEvent } from "@/hooks/use-create-event";
 import { FormProvider } from "react-hook-form";
 import { Venues } from "@/types/venues";
 import { RHFTimePicker } from "@/components/form/RHFTime";
+import { RHFTextarea } from "@/components/form/RHFTextarea";
 
 export default function CreateEventForm({ venues }: { venues: Venues }) {
   const form = useCreateEvent();
@@ -40,7 +41,7 @@ export default function CreateEventForm({ venues }: { venues: Venues }) {
 
           <RHFTimePicker control={control} name="end_time" label="End Time" placeholder="HH:mm" />
 
-          <RHFInput
+          <RHFTextarea
             control={control}
             name="additional_information"
             label="Additional Information"

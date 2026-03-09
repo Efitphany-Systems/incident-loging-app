@@ -1,3 +1,5 @@
+import { Image } from "./common";
+
 export interface Incident {
   id: string;
   created_at: string;
@@ -63,24 +65,19 @@ export interface MedicalInformation {
   destination: string;
 }
 
-export interface IncidentImage {
-  url: string;
-  path: string;
-}
-
-export type IncidentImages = IncidentImage[];
+export type IncidentImages = Image[];
 
 export interface IncidentReport {
   id: string;
   severity: "low" | "medium" | "high";
   description: string;
   created_at: string;
-  images: IncidentImage[];
+  images: IncidentImages;
   category: string;
   category_id: string;
   location: string;
   location_id: string;
-
+  venue_logo: Image[];
   event_name: string;
   event_id: string;
   event_date: string;

@@ -30,13 +30,7 @@ export const TableAction = ({ venueID }: { venueID: string }) => {
 
   return (
     <div className="flex items-center">
-      <Button
-        disabled={true}
-        variant="ghost"
-        size="icon"
-        className="cursor-pointer"
-        onClick={() => router.push(`/venues/${venueID}`)}
-      >
+      <Button variant="ghost" size="icon" className="cursor-pointer" onClick={() => router.push(`/venues/${venueID}`)}>
         <Edit size={18} />
       </Button>
 

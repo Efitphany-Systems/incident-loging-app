@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const imageSchema = z.object({
-  url: z.string().url(),
+  url: z.url(),
   path: z.string(),
 });
 

@@ -3,8 +3,9 @@
 import { supabaseServer } from "@/lib/supabase/server-client";
 import { getCurrentProfile } from "@/lib/auth";
 import { IncidentPayload } from "@/lib/schema/incident";
-import { IncidentImage, IncidentImages } from "@/types/incidents";
+import { IncidentImages } from "@/types/incidents";
 import { shiftImageFromTemp } from "../../action";
+import { Image } from "@/types/common";
 
 export async function updateIncidnetAction(payload: IncidentPayload, ID: string) {
   console.log(ID);
@@ -47,7 +48,7 @@ export async function updateIncidnetAction(payload: IncidentPayload, ID: string)
 }
 
 export async function updateIncidentImages(images: IncidentImages) {
-  const [currentIncidentImages, newIncidentImages] = images.reduce<[IncidentImage[], IncidentImage[]]>(
+  const [currentIncidentImages, newIncidentImages] = images.reduce<[Image[], Image[]]>(
     (acc, img) => {
       if (img.path?.startsWith("incidents/")) {
         acc[0].push(img);

@@ -65,7 +65,7 @@ export default function EventAndFillerInformation({ events, locations }: { event
         placeholder="Enter incident details..."
         maxRows={8}
       />
-      <RHFImageUploader name="eventAndFillerInformation.images" />
+      <RHFImageUploader showCount label="Incident Photos" name="eventAndFillerInformation.images" maxFiles={5} />
     </Card>
   );
 }

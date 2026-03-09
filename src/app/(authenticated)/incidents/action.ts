@@ -102,6 +102,7 @@ export async function getIncidentByIDAction(ID: string) {
     start_time: data?.events?.start_time,
     venue: data?.events?.venues?.name,
     venue_address: data?.events?.venues?.address,
+    venue_logo: data?.events?.venues?.logo,
 
     patron: {
       id: data?.patron[0]?.id,

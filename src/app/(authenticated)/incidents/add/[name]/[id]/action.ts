@@ -3,14 +3,14 @@
 import { supabaseServer } from "@/lib/supabase/server-client";
 import { getCurrentProfile } from "@/lib/auth";
 import { IncidentPayload } from "@/lib/schema/incident";
-import { shiftImageFromTemp } from "../../../action";
+import { moveImagesFromTempToStorage } from "@/app/(authenticated)/action";
 
 export async function createIncidentAction(payload: IncidentPayload) {
   const supabase = await supabaseServer();
   const user = await getCurrentProfile();
   if (!user) throw new Error("Invalid Operation");
 
-  const images = await shiftImageFromTemp(payload.eventAndFillerInformation.images ?? []);
+  const images = await moveImagesFromTempToStorage("incidents", payload.eventAndFillerInformation.images ?? []);
 
   const { medical, law, ...rest } = payload;
 
