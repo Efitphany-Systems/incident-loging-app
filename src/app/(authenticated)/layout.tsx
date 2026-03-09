@@ -1,6 +1,7 @@
 import { AuthProvider } from "@/components/AuthProvider";
 import Header from "@/components/layouts/Header";
 import { AppSidebar } from "@/components/layouts/sidebar/Sidebar";
+import { NotificationProvider } from "@/components/NotificationProvider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { supabaseServer } from "@/lib/supabase/server-client";
 
@@ -21,13 +22,15 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
   return (
     <AuthProvider user={profile}>
-      <SidebarProvider>
-        <AppSidebar />
-        <main className="w-full">
-          <Header />
-          <div className="sm:p-2 md:p-4">{children}</div>
-        </main>
-      </SidebarProvider>
+      <NotificationProvider>
+        <SidebarProvider>
+          <AppSidebar />
+          <main className="w-full">
+            <Header />
+            <div className="sm:p-2 md:p-4">{children}</div>
+          </main>
+        </SidebarProvider>
+      </NotificationProvider>
     </AuthProvider>
   );
 }

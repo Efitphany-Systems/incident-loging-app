@@ -2,33 +2,31 @@
 
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Upload, X, Loader } from "lucide-react";
+import { Upload, Loader } from "lucide-react";
 import { uploadImage } from "@/lib/supabase/images-browser-client";
-
-const MAX_FILES = 5;
-
-interface FilesPath {
-  path: string;
-  url: string;
-}
+import { Image } from "@/types/common";
+import { ImagePreview } from "./ImagePreview";
 
 type Props = {
-  value?: FilesPath[];
-  onChange?: (urls: FilesPath[]) => void;
+  value?: Image[] | Image;
+  onChange?: (urls: Image[]) => void;
   error?: string;
+  maxFiles: number;
+  label?: string;
+  showCount?: boolean;
 };
 
-export default function ImageUploader({ value = [], onChange, error }: Props) {
+export default function ImageUploader({ value = [], onChange, error, maxFiles = 5, label, showCount = false }: Props) {
+  const images = Array.isArray(value) ? value : [value];
+
   const [uploading, setUploading] = useState(false);
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       try {
         setUploading(true);
-
         const urls = await Promise.all(acceptedFiles.map((file) => uploadImage(file)));
-
-        const updated = [...value, ...urls].slice(0, MAX_FILES);
+        const updated = [...images, ...urls].slice(0, maxFiles);
 
         onChange?.(updated);
       } catch (err) {
@@ -37,35 +35,38 @@ export default function ImageUploader({ value = [], onChange, error }: Props) {
         setUploading(false);
       }
     },
-    [value, onChange]
+    [images, onChange, maxFiles]
   );
 
   const removeFile = (index: number) => {
-    const updated = value.filter((_, i) => i !== index);
+    const updated = images.filter((_, i) => i !== index);
     onChange?.(updated);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: { "image/*": [] },
-    disabled: uploading || value.length >= MAX_FILES,
+    disabled: uploading || images.length >= maxFiles,
   });
 
   return (
     <div className="space-y-3">
-      {/* Label */}
       <div>
-        <h3 className="text-sm font-semibold">Incident Photos</h3>
-        <p className="text-muted-foreground text-xs">
-          Upload photos related to the incident ({value.length}/{MAX_FILES})
-        </p>
+        <h3 className="text-sm font-semibold">{label}</h3>
+        {showCount && (
+          <p className="text-muted-foreground text-xs">
+            ({images.length}/{maxFiles})
+          </p>
+        )}
       </div>
 
       {/* Upload Area */}
-      {value.length < MAX_FILES && (
+      {images.length < maxFiles && (
         <div
           {...getRootProps()}
-          className={`border-border cursor-pointer rounded-lg border border-dashed p-6 text-center transition ${isDragActive ? "bg-muted/40 border-primary" : ""} `}
+          className={`border-border cursor-pointer rounded-lg border border-dashed p-6 text-center transition ${
+            isDragActive ? "bg-muted/40 border-primary" : ""
+          } `}
         >
           <input {...getInputProps()} />
 
@@ -76,25 +77,13 @@ export default function ImageUploader({ value = [], onChange, error }: Props) {
           )}
 
           <p className="text-muted-foreground text-sm">Drag & drop images here or click to upload</p>
-
-          <p className="text-muted-foreground mt-1 text-xs">Maximum {MAX_FILES} images</p>
+          <p className="text-muted-foreground mt-1 text-xs">Maximum {maxFiles} images</p>
         </div>
       )}
 
-      {/* Preview Grid */}
-      <div className="grid grid-cols-5 gap-3">
-        {value.map(({ url }, index) => (
-          <div key={index} className="group relative aspect-square overflow-hidden rounded-md border">
-            <img src={url} alt="incident" className="h-full w-full object-cover" />
-
-            <button
-              type="button"
-              onClick={() => removeFile(index)}
-              className="absolute top-1 right-1 rounded-full bg-black/70 p-1 text-white opacity-0 transition group-hover:opacity-100"
-            >
-              <X size={14} />
-            </button>
-          </div>
+      <div className={`grid gap-3 ${maxFiles < 3 ? `grid-cols-${maxFiles} md:grid-cols-3` : `grid-cols-${maxFiles}`}`}>
+        {images.map((img, index) => (
+          <ImagePreview key={index} image={img} onRemove={() => removeFile(index)} />
         ))}
       </div>
 

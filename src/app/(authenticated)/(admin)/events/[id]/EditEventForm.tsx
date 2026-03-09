@@ -11,6 +11,7 @@ import { Venues } from "@/types/venues";
 import { RHFTimePicker } from "@/components/form/RHFTime";
 import { Event } from "@/types/events";
 import { useEditEvent } from "@/hooks/use-edit-event";
+import { RHFTextarea } from "@/components/form/RHFTextarea";
 
 export default function EditEventForm({ venues, event }: { venues: Venues; event: Event }) {
   const form = useEditEvent(event);
@@ -41,7 +42,7 @@ export default function EditEventForm({ venues, event }: { venues: Venues; event
 
           <RHFTimePicker control={control} name="end_time" label="End Time" placeholder="HH:mm" />
 
-          <RHFInput
+          <RHFTextarea
             control={control}
             name="additional_information"
             label="Additional Information"

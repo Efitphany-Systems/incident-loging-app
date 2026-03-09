@@ -5,9 +5,12 @@ import ImageUploader from "../ImageUploader";
 
 type Props = {
   name: string;
+  maxFiles: number;
+  label?: string;
+  showCount?: boolean;
 };
 
-export default function RHFImageUploader({ name }: Props) {
+export default function RHFImageUploader({ name, maxFiles, label, showCount }: Props) {
   const { control } = useFormContext();
 
   return (
@@ -15,7 +18,14 @@ export default function RHFImageUploader({ name }: Props) {
       name={name}
       control={control}
       render={({ field, fieldState }) => (
-        <ImageUploader value={field.value || []} onChange={field.onChange} error={fieldState.error?.message} />
+        <ImageUploader
+          label={label}
+          maxFiles={maxFiles}
+          showCount={showCount}
+          value={field.value || []}
+          onChange={field.onChange}
+          error={fieldState.error?.message}
+        />
       )}
     />
   );

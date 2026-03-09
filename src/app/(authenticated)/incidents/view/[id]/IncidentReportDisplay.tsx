@@ -3,6 +3,7 @@ import { IncidentReport } from "@/types/incidents";
 import { FORMAT_DATE, FORMAT_TIME } from "@/utils/datetime";
 import { YES_NO } from "@/utils/display-utils";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import Image from "next/image";
 
 export default function IncidentReportDisplay({ data }: { data: IncidentReport }) {
   const Field = ({ label, value }: { label: string; value?: string | number }) => (
@@ -23,7 +24,8 @@ export default function IncidentReportDisplay({ data }: { data: IncidentReport }
 
   return (
     <div className="mb-2 flex flex-col gap-2 max-sm:px-2">
-      <div className="py-2 text-center">
+      <div className="flex flex-col items-center justify-center gap-2 py-2">
+        <Image alt="logo" width={100} height={100} src={data.venue_logo[0].url} />
         <div className="text-2xl font-semibold tracking-wide">INCIDENT REPORT</div>
       </div>
 
@@ -43,7 +45,9 @@ export default function IncidentReportDisplay({ data }: { data: IncidentReport }
             {data.images.map((img, i) => (
               <Dialog key={i}>
                 <DialogTrigger asChild>
-                  <img
+                  <Image
+                    width="100"
+                    height="100"
                     src={img.url}
                     alt={`incident-${i}`}
                     className="border-foreground aspect-square h-full w-full rounded-xl border-2 object-cover md:rounded-4xl"
