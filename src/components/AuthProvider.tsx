@@ -2,11 +2,17 @@
 
 import { AuthUser } from "@/types/auth";
 import { createContext, useContext } from "react";
+import NotificationPermissionAlert from "./NotificationsPermission";
 
 const AuthContext = createContext<AuthUser | null>(null);
 
 export function AuthProvider({ user, children }: { user: AuthUser | null; children: React.ReactNode }) {
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={user}>
+      <NotificationPermissionAlert role={user?.role ?? ""} />
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {

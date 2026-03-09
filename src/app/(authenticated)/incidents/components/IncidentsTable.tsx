@@ -7,11 +7,10 @@ import { IncidentFilters, Incidents } from "@/types/incidents";
 import { FORMAT_DATE_TIME } from "@/utils/datetime";
 import IncidentsFilters from "./IncidentsFilters";
 import { IncidentCategories } from "@/types/categories";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/browser-client";
 import { getSeverityColor } from "@/utils/severity";
 import { useSearchParams } from "next/navigation";
-import { RealtimeChannel } from "@supabase/supabase-js";
 
 export default function IncidentsTable({
   role,
@@ -23,7 +22,6 @@ export default function IncidentsTable({
   const [incidents, setIncidents] = useState<Incidents>([]);
   const supabase = createClient();
   const searchParams = useSearchParams();
-  const subscriptionRef = useRef<RealtimeChannel | null>(null);
   const filters: IncidentFilters = {
     date: searchParams.get("date") || undefined,
     category: searchParams.get("category") || undefined,
@@ -42,37 +40,9 @@ export default function IncidentsTable({
     else setIncidents(data || []);
   };
 
-  function subscribeRealtime() {
-    console.log("connecting channel");
-
-    subscriptionRef.current = supabase
-      .channel("incidents-changes")
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "incidents",
-        },
-        async () => {
-          console.log("Realtime change detected");
-          await fetchIncidents();
-        }
-      )
-      .subscribe();
-  }
-
   useEffect(() => {
     fetchIncidents();
   }, [filters.category, filters.severity, filters.date]);
-
-  useEffect(() => {
-    if (subscriptionRef.current) supabase.removeChannel(subscriptionRef.current);
-    subscribeRealtime();
-    return () => {
-      if (subscriptionRef.current) supabase.removeChannel(subscriptionRef.current);
-    };
-  }, []);
 
   return (
     <>
